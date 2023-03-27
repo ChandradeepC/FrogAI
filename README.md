@@ -1,6 +1,6 @@
 # FrogAI: A NLP + KDD project for monnitor recommendation
 
-Template recognition: (ALGORITHM)
+Template recognition:
 - usage-based recommendation request
 - specification-based recommendation request
 - comparison request - ignore specs, usage
@@ -10,14 +10,14 @@ Role-filler extraction with seperate classifiers (ALGORITHMS)
 - specification extraction
 - usage extraction
 
-Request processing: (ALGORITHMS)
+Request processing:
 - rule based decision-tree for usage-based recommendation
 - matching for specification-based recommendation
 - formatted specification pullup with metrics for comparisons
 - specification + rule based recommendation for usage-based specification-constrained predictions 
 - specification pullup + rule based analysis with norms for evaluation request
 
-Monitor database: (DATA)
+Monitor database:
 - official name and common names
 - specifications including ports
 - review links
@@ -25,11 +25,11 @@ Monitor database: (DATA)
 - special notes
 - extra information only for popular or recommendable monitors
 
-Usage database: (DATA)
+Usage database:
 - software lists with labelled software types
 - wordlists with other labelled usage types
 
-Relationship databases: (DATA)
+Relationship databases:
 - relation between usage and specification
 - metrics and norms for continuous specifications
 
