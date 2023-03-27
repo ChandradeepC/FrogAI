@@ -1,4 +1,4 @@
-# FrogAI: A NLP + KDD project for monnitor recommendation
+# FrogAI: An NLP + KDD project for monitor recommendation
 
 Template recognition:
 - usage-based recommendation request
@@ -39,6 +39,8 @@ Recommendation engine:
 - evaluation request, return pros and cons
 - if hybrid request, then return affirmative or better options
 - if one monitor is not reviewed return not reviewed. 
+
+TODO
 
 1. Scrape rtings properly again DONE
 2. Role filler extraction + dataset -> use heuristics to detect template
