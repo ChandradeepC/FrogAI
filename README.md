@@ -1,4 +1,4 @@
-FrogAI: A NLP + KDD project for monnitor recommendation
+# FrogAI: A NLP + KDD project for monnitor recommendation
 
 Template recognition: (ALGORITHM)
 - usage-based recommendation request
@@ -40,12 +40,9 @@ Recommendation engine:
 - if hybrid request, then return affirmative or better options
 - if one monitor is not reviewed return not reviewed. 
 
----------------------------------------------------------------------------------
-
 1. Scrape rtings properly again DONE
 2. Role filler extraction + dataset -> use heuristics to detect template
 
----------------------------------------------------------------------------------
 
 Template heuristics: 
 Monitors detected: 1 -> evaluation request (+ spec/usage extract + spec/usage recommendation if nothing else is detected)
