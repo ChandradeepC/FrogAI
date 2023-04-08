@@ -85,3 +85,19 @@ For work usage case, a lot of spreadsheets. Actually I also use spreadsheets for
 Lastly, I do not need this urgently, so if something more suitable is going to be released to the public within the next 3 months, I am more than willing to wait.
 
 I need help choosing between two high-end monitors: The Samsung Odyssey G7 Neo 32 inch for 1200$ or the LG 32GQ850-B (4K 165hz) for 850$ (1440p 240hz). I am coding for most of the day, but I like to play games too. The most important factor for me  is the image quality (colors and contrast). According to a lot of reviewers, the G7 is the best non-OLED panel for image quality, but I am a little skeptical about the curve. Is there a big image quality difference? Has anyone used both these displays? And is the curve on the G7 really that bad? I have used curved ultrawide before, but not a monitor which is curved to this degree. I'm also totally okay with spending the extra money if there is a big difference between the G7 and LG. I'm currently rocking an RTX 4090 paired with a 13900K.
+
+Can you please help me choose a monitor for gaming and video editing? Specs I need: 34 inch, minimum 2k, minimum 144 Hz, curved or not curved, speakers, max price 400-450 EUR, will use it with 3080 so gSync compatible Freesync PREMIUM. I searched all day and YouTube didn't help, clearly people have interests when reviewing. Found brands like Samsung Aoc GIGABYTE, Xiaomi etc and really am clueless what to buy... I used this price comparison site and you can take a look at what i already filtered and choose the best model? Appreciate your help
+
+Hey folks.
+I'm looking for a portable monitor.
+Some features it has to have:
+1) Portable, with a folding stand, and small enough to fit in a backpack or laptop sleeve. Somewhere around 13 to 16 inches is probably ideal?
+2) Low latency. I'd like to be able to plug a Nintendo Switch into it if possible and have decent latency. Refresh rate isn't as important, because the Switch can't go above 60FPS, but higher refresh rates could always be nice for future-proofing I suppose!
+3) It should be a touchscreen with good stylus support. I want to be able to draw with it plugged into my laptop (I use Windows).
+Some features that would be nice to have as well:
+4) Great colour accuracy. 100% DCI-P3, or close to it, would be a plus.
+5) Would be nice if it had a battery to not drain my laptop so much.
+6) Ideally not costing above $600 or so.
+7) Great resolution. 4k would be ideal, 1440p would be alright, would accept 1080p though if it had everything else. Obviously this affects price quite a lot, so best bang-for-the-buck is more important than out-and-out price. If a unicorn shows up, I'm willing to save for it.
+Some final notes:
+I'm fine with a variety of options. I've seen drawing tablets, regular standalone tablets with their own OS, touchscreen monitors, and even wireless monitors. So whatever suggestions you have, as long as it can do most of the things I mentioned above, we're golden

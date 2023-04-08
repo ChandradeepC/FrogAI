@@ -3,7 +3,6 @@
 Template recognition:
 - usage-based recommendation request
 - specification-based recommendation request
-- comparison request - ignore specs, usage
 - evaluation request
 
 Role-filler extraction with seperate classifiers (ALGORITHMS)
