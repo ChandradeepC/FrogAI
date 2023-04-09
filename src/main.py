@@ -1,5 +1,12 @@
+from abc import ABC, abstractmethod
 
-class MonitorRecommender:
+class Recommender:
+    @abstractmethod
+    def recommend(self):
+        pass
+        
+
+class MonitorRecommender(Recommender):
     _scale_encoder = {
         'no idea': 0,
         'never': 1,
