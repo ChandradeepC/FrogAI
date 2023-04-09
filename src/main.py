@@ -1,7 +1,15 @@
 from abc import ABC, abstractmethod
+from pathlib import Path
+home = str(Path.home()) 
+
+import sys
+sys.path.insert(0,'..')
+
+import pandas as pd
 
 class Monitor:
-    def __init__(self, res, rr, panel, size, cost, min_gpu, reviews):
+    def __init__(self, name, res, rr, panel, size, cost, min_gpu, reviews):
+        self._name = name
         self._res = res
         self._rr = rr
         self._panel = panel
@@ -10,8 +18,11 @@ class Monitor:
         self._min_gpu = min_gpu
         self._reviews = reviews
 
+    def __repr__(self):
+        return f"Monitor(name='{self._name}', res='{self._res}', rr='{self._rr}', panel='{self._panel}', size='{self._size}', cost='{self._cost}', min_gpu='{self._min_gpu}', reviews='{self._reviews}')"
 
-class Recommender:
+
+class Recommender(ABC):
     @abstractmethod
     def recommend(self):
         pass
@@ -174,6 +185,35 @@ class MonitorRecommender(Recommender):
         self._hdrvid = MonitorRecommender._scale_encoder[input['hdrvid']]
         self._aspect = MonitorRecommender._scale_encoder[input['aspect']]
         self._curve = input['curve']
+
+    def _load_data(self):
+
+        #load motion dimension
+        df = pd.read_csv('../data/motion.csv')
+        motion = []
+        for _, row in df.iterrows():
+            monitor = Monitor(row['name'], row['res'], row['rr'], row['panel'], row['size'], row['cost'], row['min_gpu'], row['reviews'])
+            motion.append(monitor)
+        
+        #load pq dimension
+        
+        #load console dimension
+        #load work dimension
+        #load HDR dimension
+        #load esports dimension
+        #load photo editing dimension
+        #load video editing dimension
+        #load media consumption dimension
+        #(?)load ultrawide dimension
+        #(?)load super ultrawide dimension
+        #(?)load curved dimension
+        
+        data = {}
+        data['motion'] = motion
+
+        return data
+
+        
         
     def recommend(self):
         pass
