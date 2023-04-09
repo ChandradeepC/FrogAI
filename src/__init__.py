@@ -1,1 +1,1 @@
-from . import FrogAI
+from . import main
