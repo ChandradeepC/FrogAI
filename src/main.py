@@ -125,13 +125,13 @@ class MonitorRecommender(Recommender):
         '3080ti',
         '3080',
         '4070',
-        '6850M'
+        '6850m'
         '3070ti',
         '6800M',
         '3070',
         '4060',
-        '6800S',
-        '6700M',
+        '6800s',
+        '6700m',
         '2080',
         '3060',
         '4050',
@@ -142,7 +142,7 @@ class MonitorRecommender(Recommender):
         '3050ti',
         '1660ti',
         '3050',
-        '6500M',
+        '6500m',
         '2050',
         '1650ti',
         '1650',
@@ -177,7 +177,7 @@ class MonitorRecommender(Recommender):
     _hdr = '../data/hdr.csv'
     _work = '../data/work.csv'
     _pq = '../data/pq.csv'
-    
+
 
     def __init__(self, input):
         self._device = input['device']
@@ -220,9 +220,10 @@ class MonitorRecommender(Recommender):
         
         data = {}
         data['motion'] = motion
-
-        return data
+        
+        self._data = data
+        return self
     
         
     def recommend(self):
-        return 'not yet implemented'
+        pass
