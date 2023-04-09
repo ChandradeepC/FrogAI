@@ -2,7 +2,7 @@
 
 Inputs:
 
-If you do not know what HDR is, select "Don't Understand" for the HDR categories
+If you do not know what HDR is, select "Don't Understand" for the HDR categories. If you are not in the US, enter an approximate converted number from your currency, however there is no guarentee that the recommended product will be available in your region. 
 
 * Budget: Float between $0 and $6000
 * Competitive Gaming
