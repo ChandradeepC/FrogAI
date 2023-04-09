@@ -1,4 +1,4 @@
 # FrogAI: Monitor Recommender
 
-trained on data from r/monitors and MonitorEnthusaists discord server
+Trained on data from r/monitors and MonitorEnthusiasts discord server
 
