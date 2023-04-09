@@ -171,12 +171,38 @@ class MonitorRecommender(Recommender):
     }
     '''
 
-    #File locations
-    _motion = '../data/motion.csv'
-    _console = '../data/console.csv'
-    _hdr = '../data/hdr.csv'
-    _work = '../data/work.csv'
-    _pq = '../data/pq.csv'
+
+    '''File locations for dimensions:
+    motion
+    pq
+    console
+    work
+    hdr
+    esports
+    photo editing
+    video editing
+    media consumption
+    '''
+
+    _path = {
+        #Balanced classes
+        'jack': '../data/jack.csv',
+        'motion_text': '../data/motion_text.csv',
+        'pq_text': '../data/pq_text.csv',
+        'pq_motion': '../data/pq_motion.csv',
+
+        #Niche classes
+        'console': '../data/console.csv',
+        'hdr_consume': '../data/hdr_consume.csv',
+        'hdr_grading': '../data/hdr_grading.csv',
+        'print': '../data/print.csv',
+
+        #One trick classes
+        'motion': '../data/motion.csv',
+        'pq': '../data/pq.csv',
+        'text': '../data/text.csv',
+        
+    }
 
 
     def __init__(self, input):
@@ -195,33 +221,18 @@ class MonitorRecommender(Recommender):
         self._hdrvid = MonitorRecommender._scale_encoder[input['hdrvid']]
         self._aspect = MonitorRecommender._scale_encoder[input['aspect']]
         self._curve = input['curve']
+        self._data = {}
 
-    def _load_data(self):
 
-        #load motion dimension
-        df = pd.read_csv(MonitorRecommender._motion)
-        motion = []
+    def _load_data(self, dim='motion'):
+
+        df = pd.read_csv(MonitorRecommender._path[dim])
+        monitorlist = []
         for _, row in df.iterrows():
             monitor = Monitor(row['name'], row['res'], row['rr'], row['panel'], row['size'], row['cost'], row['min_gpu'],row['special'], row['reviews'])
-            motion.append(monitor)
-        
-        #load pq dimension
-        
-        #load console dimension
-        #load work dimension
-        #load HDR dimension
-        #load esports dimension
-        #load photo editing dimension
-        #load video editing dimension
-        #load media consumption dimension
-        #(?)load ultrawide dimension
-        #(?)load super ultrawide dimension
-        #(?)load curved dimension
-        
-        data = {}
-        data['motion'] = motion
-        
-        self._data = data
+            monitorlist.append(monitor)
+  
+        self._data[dim] = monitorlist
         return self
     
         
