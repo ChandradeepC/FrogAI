@@ -16,4 +16,4 @@ If you do not know what HDR is, select "Don't Understand" for the HDR categories
 * SDR Video editing/grading
 * HDR Video editing/grading
 
-Choices: Don't Understand, Never, Sometimes, Frequently, Mostly, Only
+Choices: No idea, Never, Sometimes, Frequently, Mostly, Only
