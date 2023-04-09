@@ -1,14 +1,15 @@
 from abc import ABC, abstractmethod
+
 from pathlib import Path
 home = str(Path.home()) 
-
 import sys
 sys.path.insert(0,'..')
 
 import pandas as pd
 
+
 class Monitor:
-    def __init__(self, name, res, rr, panel, size, cost, min_gpu, reviews):
+    def __init__(self, name, res, rr, panel, size, cost, min_gpu, special, reviews):
         self._name = name
         self._res = res
         self._rr = rr
@@ -16,10 +17,11 @@ class Monitor:
         self._size = size
         self._cost = cost
         self._min_gpu = min_gpu
+        self._special = special
         self._reviews = reviews
 
     def __repr__(self):
-        return f"Monitor(name='{self._name}', res='{self._res}', rr='{self._rr}', panel='{self._panel}', size='{self._size}', cost='{self._cost}', min_gpu='{self._min_gpu}', reviews='{self._reviews}')"
+        return f"Monitor(name='{self._name}', res='{self._res}', rr='{self._rr}', panel='{self._panel}', size='{self._size}', cost='{self._cost}', min_gpu='{self._min_gpu}', special='{self._special}', reviews='{self._reviews}')"
 
 
 class Recommender(ABC):
@@ -169,6 +171,14 @@ class MonitorRecommender(Recommender):
     }
     '''
 
+    #File locations
+    _motion = '../data/motion.csv'
+    _console = '../data/console.csv'
+    _hdr = '../data/hdr.csv'
+    _work = '../data/work.csv'
+    _pq = '../data/pq.csv'
+    
+
     def __init__(self, input):
         self._device = input['device']
         self._gpu = input['gpu']
@@ -189,10 +199,10 @@ class MonitorRecommender(Recommender):
     def _load_data(self):
 
         #load motion dimension
-        df = pd.read_csv('../data/motion.csv')
+        df = pd.read_csv(MonitorRecommender._motion)
         motion = []
         for _, row in df.iterrows():
-            monitor = Monitor(row['name'], row['res'], row['rr'], row['panel'], row['size'], row['cost'], row['min_gpu'], row['reviews'])
+            monitor = Monitor(row['name'], row['res'], row['rr'], row['panel'], row['size'], row['cost'], row['min_gpu'],row['special'], row['reviews'])
             motion.append(monitor)
         
         #load pq dimension
@@ -212,8 +222,7 @@ class MonitorRecommender(Recommender):
         data['motion'] = motion
 
         return data
-
-        
+    
         
     def recommend(self):
-        pass
+        return 'not yet implemented'
