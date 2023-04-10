@@ -201,7 +201,6 @@ class MonitorRecommender(Recommender):
         'motion': '../data/motion.csv',
         'pq': '../data/pq.csv',
         'text': '../data/text.csv',
-        
     }
 
 
