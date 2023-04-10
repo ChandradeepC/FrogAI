@@ -150,8 +150,8 @@ class MonitorRecommender(Recommender):
 
     '''Input format:
     {
-    'device': pc, laptop, mac, console
-    'gpu': pc gpu or laptop gpu
+    'device': pc/laptop, mac, ps5, series S, series X
+    'gpu': pc gpu laptop-gpu or console model
     'budget': 0 - 6000
 
     (No idea) what this is
@@ -163,15 +163,12 @@ class MonitorRecommender(Recommender):
     
     #no idea, never, sometimes, frequently, very, only
     'comp': 
-    'sdrcas': 
-    'hdrcas':
+    'cas':
     'text':
-    'sdrmov':
-    'hdrmov':
-    'digpic': 
-    'printpic':
-    'sdrvid':
-    'hdrvid':
+    'media':
+    'pic': 
+    'print':
+    'vid':
 
     'aspect': wide, ultrawide, superultrawide
     'curve': yes, no
@@ -179,18 +176,7 @@ class MonitorRecommender(Recommender):
     '''
 
 
-    '''File locations for dimensions:
-    motion
-    pq
-    console
-    work
-    hdr
-    esports
-    photo editing
-    video editing
-    media consumption
-    '''
-
+    #File locations for dimensions:
     _path = {
         #Balanced classes
         'jack': '../data/jack.csv',
@@ -199,9 +185,7 @@ class MonitorRecommender(Recommender):
         'pq_motion': '../data/pq_motion.csv',
 
         #Niche classes
-        'console': '../data/console.csv',
-        'hdr_consume': '../data/hdr_consume.csv',
-        'hdr_grading': '../data/hdr_grading.csv',
+        'grading': '../data/grading.csv',
         'print': '../data/print.csv',
 
         #One trick classes
@@ -212,19 +196,16 @@ class MonitorRecommender(Recommender):
 
 
     def __init__(self, input):
-        self._device = input['device']
+        self._devices = input['devices']
         self._gpu = input['gpu']
         self._budget = input['budget']
         self._comp = MonitorRecommender._scale_encoder[input['comp']]
-        self._sdrcas = MonitorRecommender._scale_encoder[input['sdrcas']]
-        self._hdrcas = MonitorRecommender._scale_encoder[input['hdrcas']]
+        self._cas = MonitorRecommender._scale_encoder[input['cas']]
         self._text = MonitorRecommender._scale_encoder[input['text']]
-        self._sdrmov = MonitorRecommender._scale_encoder[input['sdrmov']]
-        self._hdrmov = MonitorRecommender._scale_encoder[input['hdrmov']]
-        self._digpic = MonitorRecommender._scale_encoder[input['digpic']]
-        self._printpic = MonitorRecommender._scale_encoder[input['printpic']]
-        self._sdrvid = MonitorRecommender._scale_encoder[input['sdrvid']]
-        self._hdrvid = MonitorRecommender._scale_encoder[input['hdrvid']]
+        self._media = MonitorRecommender._scale_encoder[input['media']]
+        self._pic = MonitorRecommender._scale_encoder[input['pic']]
+        self._print = MonitorRecommender._scale_encoder[input['print']]
+        self._vid = MonitorRecommender._scale_encoder[input['vid']]
         self._aspect = MonitorRecommender._scale_encoder[input['aspect']]
         self._curve = MonitorRecommender._scale_encoder[input['curve']]
         self._data = {}
