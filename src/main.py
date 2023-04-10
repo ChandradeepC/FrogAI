@@ -36,7 +36,7 @@ class MonitorRecommender(Recommender):
         'never': 1,
         'sometimes': 2,
         'frequently': 3,
-        'mostly': 4,
+        'very': 4,
         'only': 5,
         'yes': True,
         'no': False,
@@ -153,8 +153,15 @@ class MonitorRecommender(Recommender):
     'device': pc, laptop, mac, console
     'gpu': pc gpu or laptop gpu
     'budget': 0 - 6000
+
+    (No idea) what this is
+    I (never) plan to use my monitor for this
+    I do this (sometimes) but dont care about it
+    I do this (frequently) and it is important to me
+    This is (very) important to me
+    This is the (only) thing I do
     
-    #no idea, never, sometimes, frequently, mostly, only
+    #no idea, never, sometimes, frequently, very, only
     'comp': 
     'sdrcas': 
     'hdrcas':
@@ -233,7 +240,7 @@ class MonitorRecommender(Recommender):
   
         self._data[dim] = monitorlist
         return self
-        
+
         
     def recommend(self):
         pass
