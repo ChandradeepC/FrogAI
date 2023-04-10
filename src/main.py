@@ -48,8 +48,8 @@ class MonitorRecommender(Recommender):
     #TODO: merge the order lists
     _gpu_order = {
         '4090',
-        '7900xtx',
         '4080',
+        '7900xtx',
         '7900xt',
         '3090ti',
         '6950xt',
