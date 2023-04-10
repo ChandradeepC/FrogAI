@@ -1,1 +1,25 @@
 name,res,rr,panel,size,cost,min_gpu,curve,aspect,special,reviews
+
+Dell S2721D(S),2560x1440p,75hz,IPS,27",$250,floor,no,wide,S variant has adjustable stand, https://www.rtings.com/monitor/reviews/dell/s2721d
+
+Dell S2721Q(S),3840x2160p,60hz,IPS,27",$300,floor,no,wide,S variant has adjustable stand, https://www.rtings.com/monitor/reviews/dell/s2721qs
+
+Dell S2722QC,3840x2160p,60hz,IPS,27",$400,floor,no,wide,type-c hub with 65W charging, https://www.rtings.com/monitor/reviews/dell/s2721qs
+
+Asus PA279CV,3840x2160p,60hz,IPS,27",$450,floor,no,wide, type-c hub with 65W charging and factory calibrated, https://www.youtube.com/watch?v=kPBZPfEfA9Y
+
+Asus PA279CRV,3840x2160p,60hz,IPS,27",$500,floor,no,wide, type-c hub with 96W charging and factory calibrated, https://www.youtube.com/watch?v=kPBZPfEfA9Y
+
+LG 32UN650,3840x2160p,60hz,IPS,32",$450,floor,no,wide,,
+
+Asus PA329CV,3840x2160p,60hz,IPS,32",$700,floor,no,wide, type-c hub with 65W charging and factory calibrated,
+
+Dell U2723QE,3840x2160p,60hz,IPS Black,27",$600,floor,no,wide,type-c and ethernet hub with 90W charging, https://www.rtings.com/monitor/reviews/dell/u2723qe
+
+Dell U3223QE,3840x2160p,60hz,IPS Black,32",$600,floor,no,wide,type-c and ethernet hub with 90W charging, https://www.rtings.com/monitor/reviews/dell/u3223qe
+
+LG UlraFine 5K,5120x2880p,60hz,IPS,27",$1300,floor,no,wide, type-c hub with 96W charging and factory calibrated and glossy,
+
+Apple Studio Display,5120x2880p,60hz,IPS,27",$1600,floor,no,wide, type-c hub with 96W charging and factory calibrated and glossy, https://www.rtings.com/monitor/reviews/apple/studio-display
+
+Apple Pro Display XDR,6016x3384p,60hz,IPS FALD,32",$5000,floor,no,wide, type-c hub with 96W charging and factory calibrated and glossy,

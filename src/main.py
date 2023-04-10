@@ -14,8 +14,8 @@ class Monitor:
         self._res = res
         self._rr = rr
         self._panel = panel
-        self._size = size
-        self._cost = float(cost.replace('$', ''))
+        self._size = int(size.replace('"', ''))
+        self._cost = int(cost.replace('$', ''))
         self._min_gpu = min_gpu
         self._special = special
         self._reviews = reviews
@@ -122,6 +122,7 @@ class MonitorRecommender(Recommender):
         '560'
         '550',
         '1030'
+        'floor'
     }
 
     _laptop_gpu_order = {
@@ -178,6 +179,7 @@ class MonitorRecommender(Recommender):
 
     'aspect': wide, ultrawide, superultrawide
     'curve': yes, no
+    'size': 24,25,27,32,34,38,49
     }
     '''
 
@@ -207,7 +209,7 @@ class MonitorRecommender(Recommender):
             self._gpu = False
         self._console = input['console']
         if self._console == 'no':
-            self._gpu = False
+            self._console = False
         self._mac = MonitorRecommender._scale_encoder[input['mac']]
         self._budget = input['budget']
         self._comp = MonitorRecommender._scale_encoder[input['comp']]
@@ -219,6 +221,7 @@ class MonitorRecommender(Recommender):
         self._vid = MonitorRecommender._scale_encoder[input['vid']]
         self._aspect = MonitorRecommender._scale_encoder[input['aspect']]
         self._curve = MonitorRecommender._scale_encoder[input['curve']]
+        self._size = input['size']
         self._data = {}
 
 
