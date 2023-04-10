@@ -45,7 +45,8 @@ class MonitorRecommender(Recommender):
         'superultrawide': 3.56
     }
 
-    _pc_gpu_order = {
+    #TODO: merge the order lists
+    _gpu_order = {
         '4090',
         '7900xtx',
         '4080',
@@ -53,6 +54,7 @@ class MonitorRecommender(Recommender):
         '3090ti',
         '6950xt',
         '4070ti',
+        '4090 laptop',
         '6900xt',
         '3090',
         '3080ti',
@@ -65,6 +67,8 @@ class MonitorRecommender(Recommender):
         '3070',
         '6700xt',
         '2080ti',
+        'series_x',
+        'ps5',
         '3060ti',
         '2080super',
         '6700',
@@ -94,6 +98,7 @@ class MonitorRecommender(Recommender):
         '1660ti',
         '1070',
         '1660',
+        'series_s'
         '5500xt_8gb',
         '590',
         '980ti',
@@ -120,14 +125,13 @@ class MonitorRecommender(Recommender):
     }
 
     _laptop_gpu_order = {
-        '4090',
         '4080',
         '3080ti',
         '3080',
         '4070',
         '6850m'
         '3070ti',
-        '6800M',
+        '6800m',
         '3070',
         '4060',
         '6800s',
@@ -135,9 +139,9 @@ class MonitorRecommender(Recommender):
         '2080',
         '3060',
         '4050',
-        '6700S',
+        '6700s',
         '2070',
-        '6600M',
+        '6600m',
         '2060',
         '3050ti',
         '1660ti',
@@ -150,8 +154,10 @@ class MonitorRecommender(Recommender):
 
     '''Input format:
     {
-    'device': pc/laptop, mac, ps5, series S, series X
-    'gpu': pc gpu laptop-gpu or console model
+    Frontend message for choosign the correct platforms
+    'pc': no or name of gpu
+    'mac': no or yes
+    'console': no or name of console
     'budget': 0 - 6000
 
     (No idea) what this is
@@ -196,8 +202,13 @@ class MonitorRecommender(Recommender):
 
 
     def __init__(self, input):
-        self._devices = input['devices']
-        self._gpu = input['gpu']
+        self._gpu = input['pc']
+        if self._gpu == 'no':
+            self._gpu = False
+        self._console = input['console']
+        if self._console == 'no':
+            self._gpu = False
+        self._mac = MonitorRecommender._scale_encoder[input['mac']]
         self._budget = input['budget']
         self._comp = MonitorRecommender._scale_encoder[input['comp']]
         self._cas = MonitorRecommender._scale_encoder[input['cas']]
@@ -211,7 +222,25 @@ class MonitorRecommender(Recommender):
         self._data = {}
 
 
-    def _load_data(self, dim='motion'):
+    def _classify_platform(self):
+        if self._mac and self._console and self._gpu:
+            self._type = "mac+console+gpu"
+        elif self._mac and self._console:
+            self._type = "mac+console"
+        elif self._mac and self._gpu:
+            self._type = "mac+pc"
+        elif self._console and self._gpu:
+            self._type = "console+pc"
+        elif self._mac:
+            self._type = "mac"
+        elif self._console:
+            self._type = "console"
+        elif self._gpu:
+            self._type = "pc"
+        return self
+
+
+    def _load_data(self, dim='jack'):
 
         df = pd.read_csv(MonitorRecommender._path[dim])
         monitorlist = []
@@ -223,5 +252,6 @@ class MonitorRecommender(Recommender):
         return self
 
         
+    #NOTE: Laptops not supported at the moment
     def recommend(self):
         pass
