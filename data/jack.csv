@@ -1,1 +1,11 @@
 name,res,rr,panel,size,cost,min_gpu,curve,aspect,special,reviews
+
+Nubia RedMagic,3840x2160,160hz,IPS miniLED,27",$870,2080ti,no,wide,,https://www.youtube.com/watch?v=AHJ0yUUuPkE
+
+Innocn 27M2V,3840x2160,160hz,IPS miniLED,27",$800,2080ti,no,wide,somewhat buggy firmware,https://chimolog.co/bto-gaming-monitor-innocn-27m2v/
+
+CoolerMaster GP27U,3840x2160,160hz,IPS miniLED,27",$800,2080ti,no,wide,VRR+HDR flickering,https://www.rtings.com/monitor/reviews/cooler-master/tempest-gp27u https://www.youtube.com/watch?v=z9tLaKdOdkQ
+
+Samsung Neo G8,3840x2160,240hz,VA miniLED,32",$1300,2080ti,yes,wide,scanlines + poor cooling + firmware bugs (maybe fixed),https://www.rtings.com/monitor/reviews/samsung/odyssey-neo-g8-s32bg85 https://www.youtube.com/watch?v=SFBM-djS2d8
+
+Samsung Neo G7,3840x2160,165hz,VA miniLED,32",$1300,2080ti,yes,wide,scanlines + poor cooling + firmware bugs (maybe fixed),https://www.rtings.com/monitor/reviews/samsung/odyssey-neo-g7-s32bg75 https://www.youtube.com/watch?v=SMcABSuKAK0

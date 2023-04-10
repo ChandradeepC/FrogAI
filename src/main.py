@@ -15,7 +15,7 @@ class Monitor:
         self._rr = rr
         self._panel = panel
         self._size = size
-        self._cost = cost
+        self._cost = float(cost.replace('$', ''))
         self._min_gpu = min_gpu
         self._special = special
         self._reviews = reviews
@@ -219,7 +219,7 @@ class MonitorRecommender(Recommender):
         self._sdrvid = MonitorRecommender._scale_encoder[input['sdrvid']]
         self._hdrvid = MonitorRecommender._scale_encoder[input['hdrvid']]
         self._aspect = MonitorRecommender._scale_encoder[input['aspect']]
-        self._curve = input['curve']
+        self._curve = MonitorRecommender._scale_encoder[input['curve']]
         self._data = {}
 
 
@@ -233,7 +233,7 @@ class MonitorRecommender(Recommender):
   
         self._data[dim] = monitorlist
         return self
-    
+        
         
     def recommend(self):
         pass
