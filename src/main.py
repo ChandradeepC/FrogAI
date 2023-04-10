@@ -9,7 +9,7 @@ import pandas as pd
 
 
 class Monitor:
-    def __init__(self, name, res, rr, panel, size, cost, min_gpu, special, reviews):
+    def __init__(self, name, res, rr, panel, size, cost, min_gpu, special, curve, aspect, reviews):
         self._name = name
         self._res = res
         self._rr = rr
@@ -18,10 +18,12 @@ class Monitor:
         self._cost = int(cost.replace('$', ''))
         self._min_gpu = min_gpu
         self._special = special
+        self._curve = curve
+        self._aspect = aspect
         self._reviews = reviews
 
     def __repr__(self):
-        return f"Monitor(name='{self._name}', res='{self._res}', rr='{self._rr}', panel='{self._panel}', size='{self._size}', cost='{self._cost}', min_gpu='{self._min_gpu}', special='{self._special}', reviews='{self._reviews}')"
+        return f"Monitor(name='{self._name}', res='{self._res}', rr='{self._rr}', panel='{self._panel}', size='{self._size}', cost='{self._cost}', min_gpu='{self._min_gpu}', curve='{self._curve}',aspect='{self._aspect}', special='{self._special}', reviews='{self._reviews}')"
 
 
 class Recommender(ABC):
@@ -40,9 +42,6 @@ class MonitorRecommender(Recommender):
         'only': 5,
         'yes': True,
         'no': False,
-        'wide': 1.78,
-        'ultrawide': 2.34,
-        'superultrawide': 3.56
     }
 
     #TODO: merge the order lists
@@ -219,7 +218,7 @@ class MonitorRecommender(Recommender):
         self._pic = MonitorRecommender._scale_encoder[input['pic']]
         self._print = MonitorRecommender._scale_encoder[input['print']]
         self._vid = MonitorRecommender._scale_encoder[input['vid']]
-        self._aspect = MonitorRecommender._scale_encoder[input['aspect']]
+        self._aspect = input['aspect']
         self._curve = MonitorRecommender._scale_encoder[input['curve']]
         self._size = input['size']
         self._data = {}
@@ -248,7 +247,7 @@ class MonitorRecommender(Recommender):
         df = pd.read_csv(MonitorRecommender._path[dim])
         monitorlist = []
         for _, row in df.iterrows():
-            monitor = Monitor(row['name'], row['res'], row['rr'], row['panel'], row['size'], row['cost'], row['min_gpu'],row['special'], row['reviews'])
+            monitor = Monitor(row['name'], row['res'], row['rr'], row['panel'], row['size'], row['cost'], row['min_gpu'],row['special'], row['curve'], row['aspect'], row['reviews'])
             monitorlist.append(monitor)
   
         self._data[dim] = monitorlist
