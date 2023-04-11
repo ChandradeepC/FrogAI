@@ -2,6 +2,8 @@ name,res,rr,panel,size,cost,min_gpu,curve,aspect,special,reviews
 
 MSI G273Q(P)F,2560x1440p,165hz,IPS,27",$350,5700,no,wide,P variant has adjustable stand, https://www.rtings.com/monitor/reviews/msi/optix-g273qf https://www.youtube.com/watch?v=nnsstM_3a00 
 
+Dell S2721DGF,2560x1440p,165hz,IPS,27",$380,5700,no,wide,, https://www.rtings.com/monitor/reviews/dell/s2721dgf https://www.youtube.com/watch?v=D3vbqyjgPpY
+
 Gigabyte M32Q,2560x1440p,170hz,IPS,32",$400,5700,no,wide,, https://www.rtings.com/monitor/reviews/gigabyte/m32q https://www.youtube.com/watch?v=tS7HYqepUZI 
 
 LG 27GP850/27GP83B,2560x1440p,180hz,IPS,27",$430,5700,no,wide,, https://www.rtings.com/monitor/reviews/lg/27gp850-b-27gp83b-b 
@@ -15,6 +17,8 @@ Dell AW2723DF,2560x1440p,280hz,IPS,27",$600,5700,no,wide,, https://www.rtings.co
 LG 27GR95QE,2560x1440p,240hz,W-OLED,27",$1000,ps5,no,wide,heavy matte coating,https://www.rtings.com/monitor/reviews/lg/27gr95qe-b https://www.youtube.com/watch?v=2YBJFYGtmQk
 
 Asus PG27AQDM,2560x1440p,240hz,W-OLED,27",$1000,ps5,no,wide,heavy matte coating,
+
+LG 45GR95QE,3440x1440p,240hz,W-OLED,27",$1700,ps5,yes,ultrawide,heavy matte coating,
 
 Alienware AW3423DWF,3440x1440p,175hz,QD-OLED,34",$1100,ps5,yes,ultrawide,Broken HDR(might be fixed by firmware),https://www.rtings.com/monitor/reviews/dell/alienware-aw3423dwf https://www.youtube.com/watch?v=b0aLF3KVOTQ
 
