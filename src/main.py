@@ -178,7 +178,7 @@ class MonitorRecommender(Recommender):
 
     'aspect': nopref, wide, ultrawide, superultrawide
     'curve': yes, no
-    'size': 24,25,27,32,34,38,49
+    'size': nopref,24,25,27,32,34,38,49
     }
     '''
 
@@ -199,6 +199,9 @@ class MonitorRecommender(Recommender):
         'motion': '../data/motion.csv',
         'pq': '../data/pq.csv',
         'text': '../data/text.csv',
+
+        #Super budget class
+        'budget': '../data/budget.csv'
     }
 
 
@@ -255,5 +258,6 @@ class MonitorRecommender(Recommender):
 
         
     #NOTE: Laptops not supported at the moment
+    #Need to add ultrawides to text.csv
     def recommend(self):
         pass
