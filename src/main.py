@@ -176,7 +176,7 @@ class MonitorRecommender(Recommender):
     'print':
     'vid':
 
-    'aspect': wide, ultrawide, superultrawide
+    'aspect': nopref, wide, ultrawide, superultrawide
     'curve': yes, no
     'size': 24,25,27,32,34,38,49
     }
