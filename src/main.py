@@ -176,6 +176,7 @@ class MonitorRecommender(Recommender):
     'print':
     'vid':
 
+    Advanced filtering: 
     'aspect': nopref, wide, ultrawide, superultrawide
     'curve': yes, no
     'size': nopref,24,25,27,32,34,38,49
@@ -222,6 +223,7 @@ class MonitorRecommender(Recommender):
         self._aspect = input['aspect']
         self._curve = MonitorRecommender._scale_encoder[input['curve']]
         self._size = input['size']
+        self._res = input['res']
         self._data = {}
 
 
