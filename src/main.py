@@ -11,7 +11,7 @@ import pandas as pd
 class Monitor:
     def __init__(self, name, res, rr, panel, size, cost, min_gpu, special, curve, aspect, reviews):
         self._name = name
-        self._res = res
+        self._res = res.replace('p','')
         self._rr = rr
         self._panel = panel
         self._size = int(size.replace('"', ''))
@@ -186,6 +186,7 @@ class MonitorRecommender(Recommender):
     'curve': yes, no
     'size': nopref,24,25,27,32,34,38,49
     49 will be specially handled
+    'res': nopref,
     }
     '''
 
