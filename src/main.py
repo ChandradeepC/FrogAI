@@ -24,6 +24,11 @@ class Monitor:
 
     def __repr__(self):
         return f"Monitor(name='{self._name}', res='{self._res}', rr='{self._rr}', panel='{self._panel}', size='{self._size}', cost='{self._cost}', min_gpu='{self._min_gpu}', curve='{self._curve}',aspect='{self._aspect}', special='{self._special}', reviews='{self._reviews}')"
+    
+    def __eq__(self,other):
+        if not isinstance(other, Monitor):
+            return NotImplemented
+        return self._name == other._name
 
 
 class Recommender(ABC):
