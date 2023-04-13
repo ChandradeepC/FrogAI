@@ -234,7 +234,7 @@ class MonitorRecommender(Recommender):
 
     def _classify_platform(self):
         if self._mac and self._console and self._gpu:
-            self._type = "mac+console+gpu"
+            self._type = "mac+console+pc"
         elif self._mac and self._console:
             self._type = "mac+console"
         elif self._mac and self._gpu:
@@ -247,6 +247,8 @@ class MonitorRecommender(Recommender):
             self._type = "console"
         elif self._gpu:
             self._type = "pc"
+        else:
+            self._type = "unknown"
         return self
 
 
@@ -265,4 +267,24 @@ class MonitorRecommender(Recommender):
     #NOTE: Laptops not supported at the moment
     #Need to add ultrawides
     def recommend(self):
-        pass
+        self._classify_platform()
+        self._recommended = []
+
+        if self._type == 'mac+console+pc':
+            pass
+        elif self._type == 'mac+console':
+            pass
+        elif self._type == 'mac+pc':
+            pass
+        elif self._type == 'console+pc':
+            pass
+        elif self._type == 'mac':
+            pass
+        elif self._type == 'console':
+            pass
+        elif self._type == 'pc':
+            pass
+        else:
+            pass
+
+        return self._recommended
