@@ -39,12 +39,11 @@ class Recommender(ABC):
 
 class MonitorRecommender(Recommender):
     _scale_encoder = {
-        'no idea': 0,
-        'never': 1,
-        'sometimes': 2,
-        'frequently': 3,
-        'very': 4,
-        'only': 5,
+        'not': 0,
+        'some': 0.25,
+        'imp': 0.5,
+        'very': 0.75,
+        'only': 1,
         'yes': True,
         'no': False,
     }
@@ -165,10 +164,9 @@ class MonitorRecommender(Recommender):
     'console': no or name of console
     'budget': 0 - 6000
 
-    (No idea) what this is
-    I (never) plan to use my monitor for this
-    I do this (sometimes) but dont care about it
-    I do this (frequently) and it is important to me
+    This is (not) important to me at all
+    This is (some)what important to me
+    This is (imp)ortant to me
     This is (very) important to me
     This is the (only) thing I do
     
@@ -223,9 +221,9 @@ class MonitorRecommender(Recommender):
         self._cas = MonitorRecommender._scale_encoder[input['cas']]
         self._text = MonitorRecommender._scale_encoder[input['text']]
         self._media = MonitorRecommender._scale_encoder[input['media']]
-        self._pic = MonitorRecommender._scale_encoder[input['pic']]
+        self._pic_vid = MonitorRecommender._scale_encoder[input['pic_vid']]
         self._print = MonitorRecommender._scale_encoder[input['print']]
-        self._vid = MonitorRecommender._scale_encoder[input['vid']]
+        self._color = MonitorRecommender._scale_encoder[input['color']]
         self._aspect = input['aspect']
         self._curve = MonitorRecommender._scale_encoder[input['curve']]
         self._size = input['size']
@@ -253,8 +251,7 @@ class MonitorRecommender(Recommender):
         return self
 
 
-    def _load_data(self, dim='jack'):
-
+    def _load_csv(self, dim='jack'):
         df = pd.read_csv(MonitorRecommender._path[dim])
         monitorlist = []
         for _, row in df.iterrows():
@@ -263,6 +260,19 @@ class MonitorRecommender(Recommender):
   
         self._data[dim] = monitorlist
         return self
+    
+
+    def _load(self):
+        files = ['jack','grading','motion_text','motion','pq_motion','pq_text','pq','print','text']
+
+        for file in files:
+            self._load_csv(file)
+            #print('loaded'+file)
+
+        return self
+    
+    def _filter(self):
+        pass
 
         
     #NOTE: Laptops not supported at the moment
@@ -271,20 +281,31 @@ class MonitorRecommender(Recommender):
         self._classify_platform()
         self._recommended = []
 
+        self._load()
+
         if self._type == 'mac+console+pc':
             pass
+
         elif self._type == 'mac+console':
             pass
+
         elif self._type == 'mac+pc':
             pass
+
         elif self._type == 'console+pc':
             pass
+
         elif self._type == 'mac':
-            pass
+            #Gray out comp and cas
+            if self._color:
+                self._recommended = self._data['grading']
+
         elif self._type == 'console':
             pass
+
         elif self._type == 'pc':
             pass
+        
         else:
             pass
 
