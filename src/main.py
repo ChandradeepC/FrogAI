@@ -306,29 +306,37 @@ class MonitorRecommender(Recommender):
 
         self._load()
 
+
         if self._type == 'mac+console+pc':
             pass
+
 
         elif self._type == 'mac+console':
             pass
 
+
         elif self._type == 'mac+pc':
             pass
 
+
         elif self._type == 'console+pc':
             pass
+
 
         elif self._type == 'mac':
             #Gray out comp and cas
             if self._color:
                 self._recommended = self._data['grading']
-            
+            #
+
 
         elif self._type == 'console':
             pass
 
+
         elif self._type == 'pc':
             pass
+
 
         else:
             pass
