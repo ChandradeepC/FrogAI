@@ -49,7 +49,7 @@ class MonitorRecommender(Recommender):
     }
 
     #TODO: merge the order lists
-    _gpu_order = {
+    _gpu_order = [
         '4090',
         '4080',
         '7900xtx',
@@ -126,7 +126,7 @@ class MonitorRecommender(Recommender):
         '550',
         '1030'
         'floor'
-    }
+    ]
 
     _laptop_gpu_order = {
         '4080',
@@ -158,12 +158,15 @@ class MonitorRecommender(Recommender):
 
     '''Input format:
     {
-    Frontend message for choosign the correct platforms
+    DEVICE AND BUDGET:
     'pc': no or name of gpu
     'mac': no or yes
     'console': no or name of console
     'budget': 0 - 6000
 
+
+
+    USE CASES:
     This is (not) important to me at all
     This is (some)what important to me
     This is (imp)ortant to me
@@ -179,7 +182,7 @@ class MonitorRecommender(Recommender):
     'print':
     'vid':
 
-    Advanced filtering: 
+    ADVANCED FILTERS:
     'aspect': nopref, wide, ultrawide, superultrawide
     'curve': yes, no
     'size': nopref,24,25,27,32,34,38,49
@@ -225,7 +228,7 @@ class MonitorRecommender(Recommender):
         self._print = MonitorRecommender._scale_encoder[input['print']]
         self._color = MonitorRecommender._scale_encoder[input['color']]
         self._aspect = input['aspect']
-        self._curve = MonitorRecommender._scale_encoder[input['curve']]
+        self._curve = input['curve']
         self._size = input['size']
         self._res = input['res']
         self._data = {}
@@ -257,26 +260,46 @@ class MonitorRecommender(Recommender):
         for _, row in df.iterrows():
             monitor = Monitor(row['name'], row['res'], row['rr'], row['panel'], row['size'], row['cost'], row['min_gpu'],row['special'], row['curve'], row['aspect'], row['reviews'])
             monitorlist.append(monitor)
-  
         self._data[dim] = monitorlist
         return self
     
 
     def _load(self):
         files = ['jack','grading','motion_text','motion','pq_motion','pq_text','pq','print','text']
-
         for file in files:
             self._load_csv(file)
             #print('loaded'+file)
-
         return self
     
+    
+    
     def _filter(self):
-        pass
+        new = []
+        for monitor in self._recommended:
+            #Check gpu
+            if MonitorRecommender._gpu_order.index(self._gpu) < MonitorRecommender._gpu_order.index(monitor._min_gpu):
+                continue
+            elif self._size != 'nopref' and self._size != monitor._size:
+                continue
+            elif self._curve != 'nopref' and self._curve != monitor._curve:
+                continue
+            elif self._aspect != 'nopref' and self._aspect != monitor._aspect:
+                continue
+            elif self._size != 'nopref' and self._size != monitor._size:
+                continue
+            elif self._budget < 0.9 * monitor._cost:
+                continue
+            else:
+                new.append(monitor)
+
+        self._recommended = new
+
+        return self
+
 
         
     #NOTE: Laptops not supported at the moment
-    #Need to add ultrawides
+    #Need to add ultrawides an budget monitors
     def recommend(self):
         self._classify_platform()
         self._recommended = []
@@ -299,14 +322,17 @@ class MonitorRecommender(Recommender):
             #Gray out comp and cas
             if self._color:
                 self._recommended = self._data['grading']
+            
 
         elif self._type == 'console':
             pass
 
         elif self._type == 'pc':
             pass
-        
+
         else:
             pass
+
+        self._filter()
 
         return self._recommended
