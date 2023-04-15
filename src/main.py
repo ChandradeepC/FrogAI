@@ -40,9 +40,7 @@ class Recommender(ABC):
 class MonitorRecommender(Recommender):
     _scale_encoder = {
         'not': 0,
-        'some': 0.25,
         'imp': 0.5,
-        'very': 0.75,
         'only': 1,
         'yes': True,
         'no': False,
@@ -168,9 +166,7 @@ class MonitorRecommender(Recommender):
 
     USE CASES:
     This is (not) important to me at all
-    This is (some)what important to me
     This is (imp)ortant to me
-    This is (very) important to me
     This is the (only) thing I do
     
     #no idea, never, sometimes, frequently, very, only
