@@ -174,9 +174,11 @@ class MonitorRecommender(Recommender):
     'cas':
     'text':
     'media':
-    'pic': 
+
+    #no, yes
+    'pic_vid': 
     'print':
-    'vid':
+    'color':
 
     ADVANCED FILTERS:
     'aspect': nopref, wide, ultrawide, superultrawide
@@ -204,6 +206,9 @@ class MonitorRecommender(Recommender):
         'motion': '../data/motion.csv',
         'pq': '../data/pq.csv',
         'text': '../data/text.csv',
+        
+        #Colorimeter
+        'colorimeter': '../data/colorimeter.csv'
     }
 
 
@@ -261,7 +266,7 @@ class MonitorRecommender(Recommender):
     
 
     def _load(self):
-        files = ['jack','grading','motion_text','motion','pq_motion','pq_text','pq','print','text']
+        files = ['jack','grading','motion_text','motion','pq_motion','pq_text','pq','print','text', 'colorimeter']
         for file in files:
             self._load_csv(file)
             #print('loaded'+file)
@@ -298,9 +303,11 @@ class MonitorRecommender(Recommender):
     #Need to add ultrawides an budget monitors
     def recommend(self):
         self._classify_platform()
-        self._recommended = []
+        self._recommended = self._data['jack']
 
         self._load()
+
+        add = False
 
 
         if self._type == 'mac+console+pc':
@@ -318,14 +325,49 @@ class MonitorRecommender(Recommender):
         elif self._type == 'console+pc':
             pass
 
-
+        #----------------------------------------------
         elif self._type == 'mac':
             #Gray out comp and cas
             if self._color:
                 self._recommended = self._data['grading']
-            #
+
+            elif self._text == 0:
+                if self._media == 0:
+                    pass
+                elif self._media == 0.5:
+                    self._recommended = self._data['pq']
+                elif self._media == 1:
+                    self._recommended = self._data['pq']
 
 
+            elif self._text == 0.5:
+                if self._media == 0:
+                    self._recommended = self._data['text']
+                elif self._media == 0.5:
+                    self._recommended = self._data['pq_text']
+                elif self._media == 1:
+                    #Not possible
+                    pass
+
+
+            elif self._text == 1:
+                if self._media == 0:
+                    self._recommended = self._data['text']
+                elif self._media == 0.5:
+                    #Not possible
+                    pass
+                elif self._media == 1:
+                    #Not possible
+                    pass
+                    
+            if self._print:
+                self._recommended = [monitor for monitor in self._recommended if monitor in self._data['print']]
+
+            
+            if self._pic_vid:
+                add = True
+                
+        #----------------------------------------------
         elif self._type == 'console':
             pass
 
@@ -337,6 +379,13 @@ class MonitorRecommender(Recommender):
         else:
             pass
 
-        self._filter()
+
+        #Colorimeter addition
+        if add:
+            self._budget -= 150
+            self._filter()
+            self._recommended = self._data['colorimeter'] + self._recommended
+        else:
+            self._filter()
 
         return self._recommended
