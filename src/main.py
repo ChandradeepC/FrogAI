@@ -11,8 +11,8 @@ import pandas as pd
 class Monitor:
     def __init__(self, name, res, rr, panel, size, cost, min_gpu, special, curve, aspect, reviews):
         self._name = name
-        self._res = res.replace('p','')
-        self._rr = rr
+        self._res = res
+        self._rr = int(rr.replace('hz',''))
         self._panel = panel
         self._size = int(size.replace('"', ''))
         self._cost = int(cost.replace('$', ''))
@@ -169,16 +169,15 @@ class MonitorRecommender(Recommender):
     This is (imp)ortant to me
     This is the (only) thing I do
     
-    #no idea, never, sometimes, frequently, very, only
-    'comp': 
-    'cas':
-    'text':
-    'media':
-
+    #not, imp, only
+    'motion':
+    'pq':
+    'sharp':
+    
     #no, yes
-    'pic_vid': 
+    'edit': 
     'print':
-    'color':
+    'grade':
 
     ADVANCED FILTERS:
     'aspect': nopref, wide, ultrawide, superultrawide
@@ -201,6 +200,7 @@ class MonitorRecommender(Recommender):
         #Niche classes
         'grading': '../data/grading.csv',
         'print': '../data/print.csv',
+        'console': '../data/console.csv',
 
         #One trick classes
         'motion': '../data/motion.csv',
@@ -221,13 +221,12 @@ class MonitorRecommender(Recommender):
             self._console = False
         self._mac = MonitorRecommender._scale_encoder[input['mac']]
         self._budget = input['budget']
-        self._comp = MonitorRecommender._scale_encoder[input['comp']]
-        self._cas = MonitorRecommender._scale_encoder[input['cas']]
-        self._text = MonitorRecommender._scale_encoder[input['text']]
-        self._media = MonitorRecommender._scale_encoder[input['media']]
-        self._pic_vid = MonitorRecommender._scale_encoder[input['pic_vid']]
+        self._motion = MonitorRecommender._scale_encoder[input['motion']]
+        self._pq = MonitorRecommender._scale_encoder[input['pq']]
+        self._sharp = MonitorRecommender._scale_encoder[input['sharp']]
+        self._edit = MonitorRecommender._scale_encoder[input['edit']]
         self._print = MonitorRecommender._scale_encoder[input['print']]
-        self._color = MonitorRecommender._scale_encoder[input['color']]
+        self._grade = MonitorRecommender._scale_encoder[input['grade']]
         self._aspect = input['aspect']
         self._curve = input['curve']
         self._size = input['size']
@@ -252,6 +251,7 @@ class MonitorRecommender(Recommender):
             self._type = "pc"
         else:
             self._type = "unknown"
+
         return self
 
 
@@ -266,7 +266,7 @@ class MonitorRecommender(Recommender):
     
 
     def _load(self):
-        files = ['jack','grading','motion_text','motion','pq_motion','pq_text','pq','print','text', 'colorimeter']
+        files = ['jack','grading','motion_text','motion','pq_motion','pq_text','pq','print','text']
         for file in files:
             self._load_csv(file)
             #print('loaded'+file)
@@ -278,7 +278,7 @@ class MonitorRecommender(Recommender):
         new = []
         for monitor in self._recommended:
             #Check gpu
-            if MonitorRecommender._gpu_order.index(self._gpu) < MonitorRecommender._gpu_order.index(monitor._min_gpu):
+            if 'pc' in self._type and MonitorRecommender._gpu_order.index(self._gpu) > MonitorRecommender._gpu_order.index(monitor._min_gpu):
                 continue
             elif self._size != 'nopref' and self._size != monitor._size:
                 continue
@@ -290,10 +290,47 @@ class MonitorRecommender(Recommender):
                 continue
             elif self._budget < 0.9 * monitor._cost:
                 continue
+            elif self._type != 'mac' and 'Apple' in monitor._name:
+                continue
+            elif 'console' in self._type and monitor._aspect != 'wide':
+                continue
             else:
-                new.append(monitor)
+                new.append(monitor)  
 
         self._recommended = new
+
+        return self
+
+    def _main_map(self):
+        if self._motion == 0:
+            if self._pq == 0:
+                if self._sharp == 0: #[0,0,0]
+                    pass #just return jack
+                elif self._sharp == 0.5: #[0,0,0.5]
+                    self._recommended = self._data['text']
+                elif self._sharp == 1: #[0,0,1]
+                    self._recommended = self._data['text']
+            elif self._pq == 0.5:
+                if self._sharp == 0: #[0,0.5,0]
+                    self._recommended = self._data['pq']
+                elif self._sharp == 0.5: #[0,0.5,0.5]
+                    self._recommended = self._data['pq_text']
+            elif self._pq == 1: #[0,1,0]
+                    self._recommended = self._data['pq']
+
+        elif self._motion == 0.5:
+            if self._pq == 0:
+                if self._sharp == 0: #[0.5,0,0]
+                    self._recommended = self._data['motion']
+                elif self._sharp == 0.5: #[0.5,0,0.5]
+                    self._recommended = self._data['motion_text']
+            elif self._pq == 0.5:
+                if self._sharp == 0: #[0.5,0.5,0]
+                    self._recommended = self._data['pq_motion']
+                elif self._sharp == 0.5: #[0.5,0.5,0.5]
+                    self._recommended = self._data['jack']
+        elif self._motion == 1: #[1,0,0]
+            self._recommended = self._data['motion']
 
         return self
 
@@ -303,89 +340,26 @@ class MonitorRecommender(Recommender):
     #Need to add ultrawides an budget monitors
     def recommend(self):
         self._classify_platform()
-        self._recommended = self._data['jack']
-
         self._load()
+        self._recommended = self._data['jack']
+        #self._colorimeter = []
 
-        add = False
+        self._main_map()
 
-
-        if self._type == 'mac+console+pc':
-            pass
-
-
-        elif self._type == 'mac+console':
-            pass
-
-
-        elif self._type == 'mac+pc':
-            pass
-
-
-        elif self._type == 'console+pc':
-            pass
-
-        #----------------------------------------------
-        elif self._type == 'mac':
-            #Gray out comp and cas
-            if self._color:
+        #Color grading, gray out everything else
+        if self._grade:
                 self._recommended = self._data['grading']
 
-            elif self._text == 0:
-                if self._media == 0:
-                    pass
-                elif self._media == 0.5:
-                    self._recommended = self._data['pq']
-                elif self._media == 1:
-                    self._recommended = self._data['pq']
-
-
-            elif self._text == 0.5:
-                if self._media == 0:
-                    self._recommended = self._data['text']
-                elif self._media == 0.5:
-                    self._recommended = self._data['pq_text']
-                elif self._media == 1:
-                    #Not possible
-                    pass
-
-
-            elif self._text == 1:
-                if self._media == 0:
-                    self._recommended = self._data['text']
-                elif self._media == 0.5:
-                    #Not possible
-                    pass
-                elif self._media == 1:
-                    #Not possible
-                    pass
-                    
-            if self._print:
+        #Print intersection
+        if self._print:
                 self._recommended = [monitor for monitor in self._recommended if monitor in self._data['print']]
 
-            
-            if self._pic_vid:
-                add = True
-                
-        #----------------------------------------------
-        elif self._type == 'console':
-            pass
-
-
-        elif self._type == 'pc':
-            pass
-
-
-        else:
-            pass
-
-
         #Colorimeter addition
-        if add:
+        if self._edit or self._print:
             self._budget -= 150
             self._filter()
-            self._recommended = self._data['colorimeter'] + self._recommended
+            #self._colorimeter = self._data['colorimeter'] 
         else:
             self._filter()
 
-        return self._recommended
+        return self._recommended #, self._colorimeter
