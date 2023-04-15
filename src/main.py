@@ -360,7 +360,6 @@ class MonitorRecommender(Recommender):
         self._load()
         self._recommended = self._data['jack']
         #self._colorimeter = []
-
         self._main_map()
 
         #Color grading, gray out everything else
@@ -383,6 +382,8 @@ class MonitorRecommender(Recommender):
 
 '''
 add ultrawides to lists
+add low budget monitors to every list
+add mid range stuff to jack
 add some console motion filtering
 remove filtering if only motion is selected
 remove special options if console
