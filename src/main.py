@@ -179,12 +179,15 @@ class MonitorRecommender(Recommender):
     'print':
     'grade':
 
-    ADVANCED FILTERS:
+    OPTIONAL FILTERS:
     'aspect': nopref, wide, ultrawide, superultrawide
     'curve': yes, no
     'size': nopref,24,25,27,32,34,38,49
     49 will be specially handled
     'res': nopref,
+    'min_rr: nopref,
+    'panel': nopref,
+    'backlight': nopref
     }
     '''
 
@@ -213,6 +216,7 @@ class MonitorRecommender(Recommender):
 
 
     def __init__(self, input):
+        #Device
         self._gpu = input['pc']
         if self._gpu == 'no':
             self._gpu = False
@@ -221,16 +225,25 @@ class MonitorRecommender(Recommender):
             self._console = False
         self._mac = MonitorRecommender._scale_encoder[input['mac']]
         self._budget = input['budget']
+
+        #Main characteristics
         self._motion = MonitorRecommender._scale_encoder[input['motion']]
         self._pq = MonitorRecommender._scale_encoder[input['pq']]
         self._sharp = MonitorRecommender._scale_encoder[input['sharp']]
+
+        #Special uses
         self._edit = MonitorRecommender._scale_encoder[input['edit']]
         self._print = MonitorRecommender._scale_encoder[input['print']]
         self._grade = MonitorRecommender._scale_encoder[input['grade']]
+
+        #Filters
         self._aspect = input['aspect']
         self._curve = input['curve']
         self._size = input['size']
         self._res = input['res']
+        self._min_rr = input['min_rr']
+        self._panel = input['panel']
+        self._backlight = input['backlight']
         self._data = {}
 
 
@@ -288,6 +301,12 @@ class MonitorRecommender(Recommender):
                 continue
             elif self._size != 'nopref' and self._size != monitor._size:
                 continue
+            elif self._min_rr != 'nopref' and self._min_rr > monitor._rr:
+                continue
+            elif self._panel != 'nopref' and self._panel not in monitor._panel:
+                continue
+            elif self._backlight != 'nopref' and self._backlight not in monitor._panel:
+                continue
             elif self._budget < 0.9 * monitor._cost:
                 continue
             elif self._type != 'mac' and 'Apple' in monitor._name:
@@ -335,9 +354,7 @@ class MonitorRecommender(Recommender):
         return self
 
 
-        
-    #NOTE: Laptops not supported at the moment
-    #Need to add ultrawides an budget monitors
+    
     def recommend(self):
         self._classify_platform()
         self._load()
@@ -363,3 +380,12 @@ class MonitorRecommender(Recommender):
             self._filter()
 
         return self._recommended #, self._colorimeter
+
+'''
+add ultrawides to lists
+add some console motion filtering
+remove filtering if only motion is selected
+remove special options if console
+add colorimeter data and processing
+add laptop support
+'''
