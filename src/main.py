@@ -132,7 +132,7 @@ class MonitorRecommender(Recommender):
         '3080',
         '4070',
         '6850m'
-        '3070ti',
+        '3070ti', 
         '6800m',
         '3070',
         '4060',
