@@ -381,8 +381,6 @@ class MonitorRecommender(Recommender):
         return self._recommended #, self._colorimeter
 
 '''
-add ultrawides to lists
-add some console motion filtering
 remove filtering if only motion is selected
 remove special options if console
 add colorimeter data and processing
