@@ -382,8 +382,6 @@ class MonitorRecommender(Recommender):
 
 '''
 add ultrawides to lists
-add low budget monitors to every list
-add mid range stuff to jack
 add some console motion filtering
 remove filtering if only motion is selected
 remove special options if console
