@@ -103,7 +103,8 @@ class MonitorRecommender(Recommender):
         "1660ti",
         "1070",
         "1660",
-        "series_s" "5500xt_8gb",
+        "series_s",
+        "5500xt_8gb",
         "590",
         "980ti",
         "580_8gb",
@@ -123,8 +124,10 @@ class MonitorRecommender(Recommender):
         "1050ti",
         "1630",
         "1050",
-        "560" "550",
-        "1030" "floor",
+        "560",
+        "550",
+        "1030",
+        "floor",
     ]
 
     _laptop_gpu_order = {
@@ -132,7 +135,8 @@ class MonitorRecommender(Recommender):
         "3080ti",
         "3080",
         "4070",
-        "6850m" "3070ti",
+        "6850m",
+        "3070ti",
         "6800m",
         "3070",
         "4060",
@@ -174,10 +178,9 @@ class MonitorRecommender(Recommender):
     'pq':
     'sharp':
     
-    #no, yes
-    'edit': 
-    'print':
-    'grade':
+    'edit': no,yes
+    'print': no,yes
+    'grade': no,yes
 
     OPTIONAL FILTERS:
     'aspect': nopref, wide, ultrawide, superultrawide
