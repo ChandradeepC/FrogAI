@@ -24,10 +24,12 @@ class Monitor:
         self._special = special
         self._curve = curve
         self._aspect = aspect
-        self._reviews = reviews
+        self._reviews = str(reviews).split()
+        if "nan" in self._reviews:
+            self._reviews = []
 
     def __repr__(self):
-        return f"Monitor(name='{self._name}', res='{self._res}', rr='{self._rr}', panel='{self._panel}', size='{self._size}', cost='{self._cost}', min_gpu='{self._min_gpu}', curve='{self._curve}',aspect='{self._aspect}', special='{self._special}', reviews='{self._reviews}')"
+        return f"Monitor(name={self._name}, res={self._res}, rr={self._rr}, panel={self._panel}, size={self._size}, cost={self._cost}, min_gpu={self._min_gpu}, curve={self._curve}, aspect={self._aspect}, special={self._special}, reviews={self._reviews})"
 
     def __eq__(self, other):
         if not isinstance(other, Monitor):
