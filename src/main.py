@@ -245,7 +245,9 @@ class MonitorRecommender(Recommender):
         # Filters
         self._aspect = input["aspect"]
         self._curve = input["curve"]
-        self._size = int(input["size"])
+        self._size = input["size"]
+        if self._size != "nopref":
+            self._size = int(self._size)
         self._res = input["res"]
         self._min_rr = input["minRR"]
         if self._min_rr != "nopref":
@@ -381,6 +383,8 @@ class MonitorRecommender(Recommender):
         return self
 
     def _to_json(self):
+        self._recommended.reverse()
+
         monitor_list = []
         for monitor in self._recommended:
             monitor_dict = {
@@ -433,8 +437,10 @@ class MonitorRecommender(Recommender):
 
 
 """
+Front:
 remove filtering if only motion is selected
 remove special options if console
+Back:
 add colorimeter data and processing
 add laptop support
 """
