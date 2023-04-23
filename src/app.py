@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from main import MonitorRecommender, Monitor
+from main import MonitorRecommender
 
 app = Flask(__name__)
 
