@@ -4,6 +4,9 @@ from pathlib import Path
 
 home = str(Path.home())
 import sys
+import os
+import json
+import math
 
 sys.path.insert(0, "..")
 
@@ -197,30 +200,33 @@ class MonitorRecommender(Recommender):
     """
 
     # File locations for dimensions:
+
+    app_root = os.path.dirname(os.path.abspath(__file__))
+    path_to_data_folder = os.path.join(app_root, "..", "data")
     _path = {
         # Balanced classes
-        "jack": "../data/jack.csv",
-        "motion_text": "../data/motion_text.csv",
-        "pq_text": "../data/pq_text.csv",
-        "pq_motion": "../data/pq_motion.csv",
+        "jack": os.path.join(path_to_data_folder, "jack.csv"),
+        "motion_text": os.path.join(path_to_data_folder, "motion_text.csv"),
+        "pq_text": os.path.join(path_to_data_folder, "pq_text.csv"),
+        "pq_motion": os.path.join(path_to_data_folder, "pq_motion.csv"),
         # Niche classes
-        "grading": "../data/grading.csv",
-        "print": "../data/print.csv",
-        "console": "../data/console.csv",
+        "grading": os.path.join(path_to_data_folder, "grading.csv"),
+        "print": os.path.join(path_to_data_folder, "print.csv"),
+        "console": os.path.join(path_to_data_folder, "console.csv"),
         # One trick classes
-        "motion": "../data/motion.csv",
-        "pq": "../data/pq.csv",
-        "text": "../data/text.csv",
+        "motion": os.path.join(path_to_data_folder, "motion.csv"),
+        "pq": os.path.join(path_to_data_folder, "pq.csv"),
+        "text": os.path.join(path_to_data_folder, "text.csv"),
         # Colorimeter
-        "colorimeter": "../data/colorimeter.csv",
+        "colorimeter": os.path.join(path_to_data_folder, "colorimeter.csv"),
     }
 
     def __init__(self, input):
         # Device
-        self._gpu = input["pc"]
+        self._gpu = input["pcGpu"]
         if self._gpu == "no":
             self._gpu = False
-        self._console = input["console"]
+        self._console = input["consoles"]
         if self._console == "no":
             self._console = False
         self._mac = MonitorRecommender._scale_encoder[input["mac"]]
@@ -239,9 +245,11 @@ class MonitorRecommender(Recommender):
         # Filters
         self._aspect = input["aspect"]
         self._curve = input["curve"]
-        self._size = input["size"]
+        self._size = int(input["size"])
         self._res = input["res"]
-        self._min_rr = input["min_rr"]
+        self._min_rr = input["minRR"]
+        if self._min_rr != "nopref":
+            self._min_rr = int(self._min_rr.replace("Hz", ""))
         self._panel = input["panel"]
         self._backlight = input["backlight"]
         self._data = {}
@@ -372,6 +380,28 @@ class MonitorRecommender(Recommender):
 
         return self
 
+    def _to_json(self):
+        monitor_list = []
+        for monitor in self._recommended:
+            monitor_dict = {
+                "name": monitor._name,
+                "resolution": monitor._res,
+                "refreshRate": monitor._rr,
+                "panel": monitor._panel,
+                "size": monitor._size,
+                "cost": monitor._cost,
+                "minGpu": monitor._min_gpu,
+                "curve": monitor._curve,
+                "aspectRatio": monitor._aspect,
+                "specialFeatures": monitor._special,
+                "reviews": monitor._reviews,
+            }
+            for key, value in monitor_dict.items():
+                if isinstance(value, float) and math.isnan(value):
+                    monitor_dict[key] = None
+            monitor_list.append(monitor_dict)
+        return json.dumps(monitor_list)
+
     def recommend(self):
         self._classify_platform()
         self._load()
@@ -399,7 +429,7 @@ class MonitorRecommender(Recommender):
         else:
             self._filter()
 
-        return self._recommended  # , self._colorimeter
+        return self._to_json()  # , self._colorimeter
 
 
 """
