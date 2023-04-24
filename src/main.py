@@ -251,7 +251,7 @@ class MonitorRecommender(Recommender):
         self._res = input["res"]
         self._min_rr = input["minRR"]
         if self._min_rr != "nopref":
-            self._min_rr = int(self._min_rr.replace("Hz", ""))
+            self._min_rr = int(self._min_rr.replace("hz", ""))
         self._panel = input["panel"]
         self._backlight = input["backlight"]
         self._data = {}
