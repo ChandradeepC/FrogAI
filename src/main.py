@@ -72,7 +72,7 @@ class MonitorRecommender(Recommender):
     _scale_encoder = {
         "not": 0,
         "some": 0.1,
-        "imp": 0.55,
+        "imp": 0.4,
         "very": 0.8,
         "only": 1,
         "yes": True,
@@ -398,7 +398,7 @@ class MonitorRecommender(Recommender):
 
         # Colorimeter addition and final filter
         if self._edit or self._print:
-            self._budget -= 150
+            self._budget -= 200
             self._filter()
         else:
             self._filter()
