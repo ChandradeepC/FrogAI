@@ -15,24 +15,46 @@ import pandas as pd
 
 class Monitor:
     def __init__(
-        self, name, res, rr, panel, size, cost, min_gpu, special, curve, aspect, reviews
+        self,
+        name,
+        motion,
+        pq,
+        sharp,
+        res,
+        rr,
+        panel,
+        size,
+        cost,
+        min_gpu,
+        special,
+        curve,
+        adobe_rgb,
+        hdr,
+        aspect,
+        reviews,
     ):
         self._name = name
+        self._motion = motion
+        self._pq = pq
+        self._sharp = sharp
         self._res = res
         self._rr = int(rr.replace("hz", ""))
         self._panel = panel
         self._size = int(size.replace('"', ""))
-        self._cost = int(cost.replace("$", ""))
+        self._cost = cost
         self._min_gpu = min_gpu
         self._special = special
         self._curve = curve
+        self._adobe_rgb = adobe_rgb
+        self._hdr = hdr
         self._aspect = aspect
         self._reviews = str(reviews).split()
         if "nan" in self._reviews:
             self._reviews = []
+        self._score = 0
 
     def __repr__(self):
-        return f"Monitor(name={self._name}, res={self._res}, rr={self._rr}, panel={self._panel}, size={self._size}, cost={self._cost}, min_gpu={self._min_gpu}, curve={self._curve}, aspect={self._aspect}, special={self._special}, reviews={self._reviews})"
+        return f"Monitor(name={self._name}, motion={self._motion}, pq={self._pq}, sharp={self._sharp}, res={self._res}, rr={self._rr}hz, panel={self._panel}, size={self._size}, cost=${self._cost}, min_gpu={self._min_gpu}, special={self._special}, curve={self._curve}, adobe_rgb={self._adobe_rgb},hdr={self._hdr}, aspect={self._aspect}, reviews={self._reviews})"
 
     def __eq__(self, other):
         if not isinstance(other, Monitor):
@@ -49,8 +71,9 @@ class Recommender(ABC):
 class MonitorRecommender(Recommender):
     _scale_encoder = {
         "not": 0,
-        "some": 0.25,
-        "imp": 0.5,
+        "some": 0.1,
+        "imp": 0.55,
+        "very": 0.8,
         "only": 1,
         "yes": True,
         "no": False,
@@ -164,98 +187,55 @@ class MonitorRecommender(Recommender):
         "1650",
     }
 
-    """Input format:
-    {
-    DEVICE AND BUDGET:
-    'pc': no or name of gpu
-    'mac': no or yes
-    'console': no or name of console
-    'budget': 0 - 6000
-
-
-
-    USE CASES:
-    This is (not) important to me at all
-    This is (imp)ortant to me
-    This is the (only) thing I do
-    
-    #not, imp, only
-    'motion':
-    'pq':
-    'sharp':
-    
-    'edit': no,yes
-    'print': no,yes
-    'grade': no,yes
-
-    OPTIONAL FILTERS:
-    'aspect': nopref, wide, ultrawide, superultrawide
-    'curve': yes, no
-    'size': nopref,24,25,27,32,34,38,49
-    49 will be specially handled
-    'res': nopref,
-    'min_rr: nopref,
-    'panel': nopref,
-    'backlight': nopref
-    }
-    """
-
-    # File locations for dimensions:
-
-    app_root = os.path.dirname(os.path.abspath(__file__))
-    path_to_data_folder = os.path.join(app_root, "..", "data")
-    _path = {
-        # Balanced classes
-        "jack": os.path.join(path_to_data_folder, "jack.csv"),
-        "motion_text": os.path.join(path_to_data_folder, "motion_text.csv"),
-        "pq_text": os.path.join(path_to_data_folder, "pq_text.csv"),
-        "pq_motion": os.path.join(path_to_data_folder, "pq_motion.csv"),
-        # Niche classes
-        "grading": os.path.join(path_to_data_folder, "grading.csv"),
-        "print": os.path.join(path_to_data_folder, "print.csv"),
-        "console": os.path.join(path_to_data_folder, "console.csv"),
-        # One trick classes
-        "motion": os.path.join(path_to_data_folder, "motion.csv"),
-        "pq": os.path.join(path_to_data_folder, "pq.csv"),
-        "text": os.path.join(path_to_data_folder, "text.csv"),
-        # Colorimeter
-        "colorimeter": os.path.join(path_to_data_folder, "colorimeter.csv"),
-    }
-
-    def __init__(self, input):
+    def __init__(self, input=None):
         # Device
-        self._gpu = input["pcGpu"]
-        if self._gpu == "no":
-            self._gpu = False
-        self._console = input["consoles"]
-        if self._console == "no":
-            self._console = False
-        self._mac = MonitorRecommender._scale_encoder[input["mac"]]
-        self._budget = input["budget"]
+        if input is None:
+            input = {}
 
-        # Main characteristics
-        self._motion = MonitorRecommender._scale_encoder[input["motion"]]
-        self._pq = MonitorRecommender._scale_encoder[input["pq"]]
-        self._sharp = MonitorRecommender._scale_encoder[input["sharp"]]
+        else:
+            self._gpu = input["pcGpu"]
+            if self._gpu == "no":
+                self._gpu = False
+            self._console = input["consoles"]
+            if self._console == "no":
+                self._console = False
+            self._mac = MonitorRecommender._scale_encoder[input["mac"]]
+            self._budget = input["budget"]
 
-        # Special uses
-        self._edit = MonitorRecommender._scale_encoder[input["edit"]]
-        self._print = MonitorRecommender._scale_encoder[input["print"]]
-        self._grade = MonitorRecommender._scale_encoder[input["grade"]]
+            # Mode: basic or advanced
+            self._mode = input["mode"]
 
-        # Filters
-        self._aspect = input["aspect"]
-        self._curve = input["curve"]
-        self._size = input["size"]
-        if self._size != "nopref":
-            self._size = int(self._size)
-        self._res = input["res"]
-        self._min_rr = input["minRR"]
-        if self._min_rr != "nopref":
-            self._min_rr = int(self._min_rr.replace("hz", ""))
-        self._panel = input["panel"]
-        self._backlight = input["backlight"]
-        self._data = {}
+            # Basic uses
+            self._casual = MonitorRecommender._scale_encoder[input["casual"]]
+            self._comp = MonitorRecommender._scale_encoder[input["comp"]]
+            self._text = MonitorRecommender._scale_encoder[input["text"]]
+            self._media = MonitorRecommender._scale_encoder[input["media"]]
+
+            # Advanced characteristics
+            self._motion = MonitorRecommender._scale_encoder[input["motion"]]
+            self._pq = MonitorRecommender._scale_encoder[input["pq"]]
+            self._sharp = MonitorRecommender._scale_encoder[input["sharp"]]
+
+            # Special uses
+            self._edit = MonitorRecommender._scale_encoder[input["edit"]]
+            self._print = MonitorRecommender._scale_encoder[input["print"]]
+            self._grade = MonitorRecommender._scale_encoder[input["grade"]]
+
+            # Filters
+            self._aspect = input["aspect"]
+            self._curve = input["curve"]
+            self._size = input["size"]
+            if self._size != "nopref":
+                self._size = int(self._size)
+            self._res = input["res"]
+            self._min_rr = input["minRR"]
+            if self._min_rr != "nopref":
+                self._min_rr = int(self._min_rr.replace("hz", ""))
+            self._panel = input["panel"]
+            self._backlight = input["backlight"]
+            self._hdr = input["hdr"]
+
+            self._data = {}
 
     def _classify_platform(self):
         if self._mac and self._console and self._gpu:
@@ -277,42 +257,32 @@ class MonitorRecommender(Recommender):
 
         return self
 
-    def _load_csv(self, dim="jack"):
-        df = pd.read_csv(MonitorRecommender._path[dim])
+    def _load(self):
+        app_root = os.path.dirname(os.path.abspath(__file__))
+        datapath = os.path.join(app_root, "..", "data", "monitors.xlsx")
+        df = pd.read_excel(datapath)
         monitorlist = []
         for _, row in df.iterrows():
             monitor = Monitor(
-                row["name"],
-                row["res"],
-                row["rr"],
-                row["panel"],
-                row["size"],
-                row["cost"],
-                row["min_gpu"],
-                row["special"],
-                row["curve"],
-                row["aspect"],
-                row["reviews"],
+                name=row["name"],
+                motion=row["motion"],
+                pq=row["pq"],
+                sharp=row["sharp"],
+                res=row["res"],
+                rr=row["rr"],
+                panel=row["panel"],
+                size=row["size"],
+                cost=row["cost"],
+                min_gpu=row["min_gpu"],
+                special=row["special"],
+                curve=row["curve"],
+                adobe_rgb=row["adobe_rgb"],
+                hdr=row["hdr"],
+                aspect=row["aspect"],
+                reviews=row["reviews"],
             )
             monitorlist.append(monitor)
-        self._data[dim] = monitorlist
-        return self
-
-    def _load(self):
-        files = [
-            "jack",
-            "grading",
-            "motion_text",
-            "motion",
-            "pq_motion",
-            "pq_text",
-            "pq",
-            "print",
-            "text",
-        ]
-        for file in files:
-            self._load_csv(file)
-            # print('loaded'+file)
+        self._data = monitorlist
         return self
 
     def _filter(self):
@@ -343,6 +313,8 @@ class MonitorRecommender(Recommender):
                 continue
             elif "console" in self._type and monitor._aspect != "wide":
                 continue
+            elif self._hdr != "nopref" and self._hdr != monitor._hdr:
+                continue
             else:
                 new.append(monitor)
 
@@ -350,46 +322,35 @@ class MonitorRecommender(Recommender):
 
         return self
 
-    def _main_map(self):
-        if self._motion == 0:
-            if self._pq == 0:
-                if self._sharp == 0:  # [0,0,0]
-                    pass  # just return jack
-                elif self._sharp == 0.5:  # [0,0,0.5]
-                    self._recommended = self._data["text"]
-                elif self._sharp == 1:  # [0,0,1]
-                    self._recommended = self._data["text"]
-            elif self._pq == 0.5:
-                if self._sharp == 0:  # [0,0.5,0]
-                    self._recommended = self._data["pq"]
-                elif self._sharp == 0.5:  # [0,0.5,0.5]
-                    self._recommended = self._data["pq_text"]
-            elif self._pq == 1:  # [0,1,0]
-                self._recommended = self._data["pq"]
+    def _advanced_recommend(self):
+        for monitor in self._recommended:
+            monitor._score = (
+                self._motion * monitor._motion
+                + self._pq * monitor._pq
+                + self._sharp * monitor._sharp
+            )
 
-        elif self._motion == 0.5:
-            if self._pq == 0:
-                if self._sharp == 0:  # [0.5,0,0]
-                    self._recommended = self._data["motion"]
-                elif self._sharp == 0.5:  # [0.5,0,0.5]
-                    self._recommended = self._data["motion_text"]
-            elif self._pq == 0.5:
-                if self._sharp == 0:  # [0.5,0.5,0]
-                    self._recommended = self._data["pq_motion"]
-                elif self._sharp == 0.5:  # [0.5,0.5,0.5]
-                    self._recommended = self._data["jack"]
-        elif self._motion == 1:  # [1,0,0]
-            self._recommended = self._data["motion"]
+        self._recommended = sorted(
+            self._recommended, key=lambda monitor: monitor._score, reverse=True
+        )
 
         return self
 
+    def _basic_recommend(self):
+        return self
+
     def _to_json(self):
-        self._recommended.reverse()
+        self._recommended = (
+            self._recommended[:5] if len(self._recommended) > 5 else self._recommended
+        )
 
         monitor_list = []
         for monitor in self._recommended:
             monitor_dict = {
                 "name": monitor._name,
+                "motion": monitor._motion,
+                "pq": monitor._pq,
+                "sharp": monitor._sharp,
                 "resolution": monitor._res,
                 "refreshRate": monitor._rr,
                 "panel": monitor._panel,
@@ -399,6 +360,8 @@ class MonitorRecommender(Recommender):
                 "curve": monitor._curve,
                 "aspectRatio": monitor._aspect,
                 "specialFeatures": monitor._special,
+                "adobeRgb": monitor._adobe_rgb,
+                "hdr": monitor._hdr,
                 "reviews": monitor._reviews,
             }
             for key, value in monitor_dict.items():
@@ -410,23 +373,30 @@ class MonitorRecommender(Recommender):
     def recommend(self):
         self._classify_platform()
         self._load()
-        self._recommended = self._data["jack"]
+        self._recommended = self._data
         # self._colorimeter = []
-        self._main_map()
 
-        # Color grading, gray out everything else
+        # Handle main recommendations
+        if self._mode == "advanced":
+            self._advanced_recommend()
+        else:
+            self._basic_recommend()
+
+        # Color grading
         if self._grade:
-            self._recommended = self._data["grading"]
+            self._recommended = [
+                monitor
+                for monitor in self._data
+                if "hardware calibration" in monitor._special
+            ]
 
         # Print intersection
         if self._print:
             self._recommended = [
-                monitor
-                for monitor in self._recommended
-                if monitor in self._data["print"]
+                monitor for monitor in self._recommended if monitor._adobe_rgb == "yes"
             ]
 
-        # Colorimeter addition
+        # Colorimeter addition and final filter
         if self._edit or self._print:
             self._budget -= 150
             self._filter()
@@ -435,13 +405,3 @@ class MonitorRecommender(Recommender):
             self._filter()
 
         return self._to_json()  # , self._colorimeter
-
-
-"""
-Front:
-remove filtering if only motion is selected
-remove special options if console
-Back:
-add colorimeter data and processing
-add laptop support
-"""
