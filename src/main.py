@@ -400,7 +400,6 @@ class MonitorRecommender(Recommender):
         if self._edit or self._print:
             self._budget -= 150
             self._filter()
-            # self._colorimeter = self._data['colorimeter']
         else:
             self._filter()
 
