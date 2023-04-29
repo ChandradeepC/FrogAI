@@ -49,6 +49,7 @@ class Recommender(ABC):
 class MonitorRecommender(Recommender):
     _scale_encoder = {
         "not": 0,
+        "some": 0.25,
         "imp": 0.5,
         "only": 1,
         "yes": True,
