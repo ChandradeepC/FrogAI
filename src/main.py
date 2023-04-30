@@ -72,7 +72,7 @@ class MonitorRecommender(Recommender):
     _scale_encoder = {
         "not": 0,
         "some": 0.1,
-        "imp": 0.4,
+        "imp": 0.41,
         "very": 0.8,
         "only": 1,
         "yes": True,
