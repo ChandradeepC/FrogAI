@@ -42,15 +42,13 @@ class Monitor:
         self._panel = panel
         self._size = int(size.replace('"', ""))
         self._cost = cost
-        self._min_gpu = min_gpu
+        self._min_gpu = str(min_gpu)
         self._special = special
         self._curve = curve
         self._adobe_rgb = adobe_rgb
         self._hdr = hdr
         self._aspect = aspect
-        self._reviews = str(reviews).split()
-        if "nan" in self._reviews:
-            self._reviews = []
+        self._reviews = [pair.split(",") for pair in reviews.split(";")]
         self._score = 0
 
     def __repr__(self):
@@ -70,10 +68,10 @@ class Recommender(ABC):
 
 class MonitorRecommender(Recommender):
     _scale_encoder = {
-        "not": 0,
-        "some": 0.1,
-        "imp": 0.41,
-        "very": 0.8,
+        "not": 0.1,
+        "some": 0.25,
+        "imp": 0.8,
+        "very": 1,
         "only": 1,
         "yes": True,
         "no": False,
@@ -283,6 +281,9 @@ class MonitorRecommender(Recommender):
             )
             monitorlist.append(monitor)
         self._data = monitorlist
+
+        self._data = sorted(self._data, key=lambda monitor: monitor._cost, reverse=True)
+
         return self
 
     def _filter(self):
@@ -309,7 +310,9 @@ class MonitorRecommender(Recommender):
                 continue
             elif self._budget < 0.9 * monitor._cost:
                 continue
-            elif self._type != "mac" and "Apple" in monitor._name:
+            elif self._type != "mac" and (
+                "Apple" in monitor._name or "UltraFine" in monitor._name
+            ):
                 continue
             elif "console" in self._type and monitor._aspect != "wide":
                 continue
@@ -397,10 +400,6 @@ class MonitorRecommender(Recommender):
             ]
 
         # Colorimeter addition and final filter
-        if self._edit or self._print:
-            self._budget -= 200
-            self._filter()
-        else:
-            self._filter()
+        self._filter()
 
         return self._to_json()  # , self._colorimeter
