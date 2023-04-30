@@ -68,9 +68,9 @@ class Recommender(ABC):
 
 class MonitorRecommender(Recommender):
     _scale_encoder = {
-        "not": 0.1,
-        "some": 0.25,
-        "imp": 0.8,
+        "not": 0,
+        "some": 0.1,
+        "imp": 0.6,
         "very": 1,
         "only": 1,
         "yes": True,
@@ -232,6 +232,9 @@ class MonitorRecommender(Recommender):
             self._panel = input["panel"]
             self._backlight = input["backlight"]
             self._hdr = input["hdr"]
+            self._finish = input["finish"]
+            self._hub = input["hub"]
+            self._calibrated = input["calibrated"]
 
             self._data = {}
 
@@ -314,9 +317,19 @@ class MonitorRecommender(Recommender):
                 "Apple" in monitor._name or "UltraFine" in monitor._name
             ):
                 continue
-            elif "console" in self._type and monitor._aspect != "wide":
+            elif "console" in self._type and monitor._aspect != "Wide":
                 continue
             elif self._hdr != "nopref" and self._hdr != monitor._hdr:
+                continue
+            elif (
+                self._calibrated != "nopref"
+                and "calibration" not in monitor._special
+                and "calibrated" not in monitor._special
+            ):
+                continue
+            elif self._finish != "nopref" and self._finish not in monitor._special:
+                continue
+            elif self._hub != "nopref" and "hub" not in monitor._special:
                 continue
             else:
                 new.append(monitor)
@@ -342,9 +355,9 @@ class MonitorRecommender(Recommender):
     def _basic_recommend(self):
         return self
 
-    def _to_json(self):
+    def _to_json(self, x):
         self._recommended = (
-            self._recommended[:5] if len(self._recommended) > 5 else self._recommended
+            self._recommended[:x] if len(self._recommended) > x else self._recommended
         )
 
         monitor_list = []
@@ -396,10 +409,10 @@ class MonitorRecommender(Recommender):
         # Print intersection
         if self._print:
             self._recommended = [
-                monitor for monitor in self._recommended if monitor._adobe_rgb == "yes"
+                monitor for monitor in self._recommended if monitor._adobe_rgb == "Yes"
             ]
 
         # Colorimeter addition and final filter
         self._filter()
 
-        return self._to_json()  # , self._colorimeter
+        return self._to_json(5)  # , self._colorimeter
