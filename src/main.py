@@ -17,9 +17,13 @@ class Monitor:
     def __init__(
         self,
         name,
-        motion,
-        pq,
+        persistence,
+        response,
+        contrast,
+        brightness,
+        volume,
         sharp,
+        subpixel,
         res,
         rr,
         panel,
@@ -34,16 +38,20 @@ class Monitor:
         reviews,
     ):
         self._name = name
-        self._motion = motion
-        self._pq = pq
+        self._persistence = persistence
+        self._response = response
+        self._contrast = contrast
+        self._brightness = brightness
+        self._volume = volume
         self._sharp = sharp
+        self._subpixel = subpixel
         self._res = res
         self._rr = int(rr.replace("hz", ""))
         self._panel = panel
         self._size = int(size.replace('"', ""))
         self._cost = cost
         self._min_gpu = str(min_gpu)
-        self._special = special
+        self._special = special.replace(" +", ";")
         self._curve = curve
         self._adobe_rgb = adobe_rgb
         self._hdr = hdr
@@ -51,8 +59,8 @@ class Monitor:
         self._reviews = [pair.split(",") for pair in reviews.split(";")]
         self._score = 0
 
-    def __repr__(self):
-        return f"Monitor(name={self._name}, motion={self._motion}, pq={self._pq}, sharp={self._sharp}, res={self._res}, rr={self._rr}hz, panel={self._panel}, size={self._size}, cost=${self._cost}, min_gpu={self._min_gpu}, special={self._special}, curve={self._curve}, adobe_rgb={self._adobe_rgb},hdr={self._hdr}, aspect={self._aspect}, reviews={self._reviews})"
+    # def __repr__(self):
+    #     return f"Monitor(name={self._name}, motion={self._motion}, pq={self._pq}, sharp={self._sharp}, res={self._res}, rr={self._rr}hz, panel={self._panel}, size={self._size}, cost=${self._cost}, min_gpu={self._min_gpu}, special={self._special}, curve={self._curve}, adobe_rgb={self._adobe_rgb},hdr={self._hdr}, aspect={self._aspect}, reviews={self._reviews})"
 
     def __eq__(self, other):
         if not isinstance(other, Monitor):
@@ -210,9 +218,13 @@ class MonitorRecommender(Recommender):
             self._media = MonitorRecommender._scale_encoder[input["media"]]
 
             # Advanced characteristics
-            self._motion = MonitorRecommender._scale_encoder[input["motion"]]
-            self._pq = MonitorRecommender._scale_encoder[input["pq"]]
+            self._persistence = MonitorRecommender._scale_encoder[input["persistence"]]
+            self._response = MonitorRecommender._scale_encoder[input["response"]]
+            self._contrast = MonitorRecommender._scale_encoder[input["contrast"]]
+            self._brightness = MonitorRecommender._scale_encoder[input["brightness"]]
+            self._volume = MonitorRecommender._scale_encoder[input["volume"]]
             self._sharp = MonitorRecommender._scale_encoder[input["sharp"]]
+            self._subpixel = MonitorRecommender._scale_encoder[input["subpixel"]]
 
             # Special uses
             self._edit = MonitorRecommender._scale_encoder[input["edit"]]
@@ -267,9 +279,13 @@ class MonitorRecommender(Recommender):
         for _, row in df.iterrows():
             monitor = Monitor(
                 name=row["name"],
-                motion=row["motion"],
-                pq=row["pq"],
+                persistence=row["persistence"],
+                response=row["response"],
+                contrast=row["contrast"],
+                brightness=row["brightness"],
+                volume=row["volume"],
                 sharp=row["sharp"],
+                subpixel=row["subpixel"],
                 res=row["res"],
                 rr=row["rr"],
                 panel=row["panel"],
@@ -349,9 +365,13 @@ class MonitorRecommender(Recommender):
     def _advanced_recommend(self):
         for monitor in self._recommended:
             monitor._score = (
-                self._motion * monitor._motion
-                + self._pq * monitor._pq
+                self._persistence * monitor._persistence
+                + self._response * monitor._response
+                + self._contrast * monitor._contrast
+                + self._brightness * monitor._brightness
+                + self._volume * monitor._volume
                 + self._sharp * monitor._sharp
+                + self._subpixel * monitor._subpixel
             )
 
         self._recommended = sorted(
@@ -360,28 +380,59 @@ class MonitorRecommender(Recommender):
 
         return self
 
-    #       Comp -> 0.8 motion + 0.1 pq + 0.1 sharp
-    #       Cas -> 0.45 motion + 0.3 pq + 0.25 sharp
-    #       Media -> 0.1 motion + 0.6 pq + 0.2 sharp
-    #       Work -> 0.1 motion + 0 pq + 0.9 sharp
-
+    # needs to be updated later
     def _basic_recommend(self):
         for monitor in self._recommended:
             monitor._score = (
                 self._comp
-                * (0.9 * monitor._motion + 0 * monitor._pq + 0.1 * monitor._sharp)
+                * (
+                    0 * monitor._persistence
+                    + 0 * monitor._response
+                    + 0 * monitor._contrast
+                    + 0 * monitor._brightness
+                    + 0 * monitor._volume
+                    + 0 * monitor._sharp
+                    + 0 * monitor._subpixel
+                )
                 + self._casual
-                * (0.45 * monitor._motion + 0.3 * monitor._pq + 0.25 * monitor._sharp)
+                * (
+                    0 * monitor._persistence
+                    + 0 * monitor._response
+                    + 0 * monitor._contrast
+                    + 0 * monitor._brightness
+                    + 0 * monitor._volume
+                    + 0 * monitor._sharp
+                    + 0 * monitor._subpixel
+                )
                 + self._media
-                * (0 * monitor._motion + 0.7 * monitor._pq + 0.3 * monitor._sharp)
+                * (
+                    0 * monitor._persistence
+                    + 0 * monitor._response
+                    + 0 * monitor._contrast
+                    + 0 * monitor._brightness
+                    + 0 * monitor._volume
+                    + 0 * monitor._sharp
+                    + 0 * monitor._subpixel
+                )
                 + self._text
-                * (0 * monitor._motion + 0 * monitor._pq + 1 * monitor._sharp)
+                * (
+                    0 * monitor._persistence
+                    + 0 * monitor._response
+                    + 0 * monitor._contrast
+                    + 0 * monitor._brightness
+                    + 0 * monitor._volume
+                    + 0 * monitor._sharp
+                    + 0 * monitor._subpixel
+                )
             )
             # print(monitor._name, monitor._score)
 
         self._recommended = sorted(
             self._recommended, key=lambda monitor: monitor._score, reverse=True
         )
+        return self
+
+    def _categorize_perf(self):
         return self
 
     def _to_json(self, x):
@@ -393,9 +444,13 @@ class MonitorRecommender(Recommender):
         for monitor in self._recommended:
             monitor_dict = {
                 "name": monitor._name,
-                "motion": monitor._motion,
-                "pq": monitor._pq,
+                "persistence": monitor._persistence,
+                "response": monitor._response,
+                "contrast": monitor._contrast,
+                "brightness": monitor._brightness,
+                "volume": monitor._volume,
                 "sharp": monitor._sharp,
+                "subpixel": monitor._subpixel,
                 "resolution": monitor._res,
                 "refreshRate": monitor._rr,
                 "panel": monitor._panel,
@@ -440,9 +495,10 @@ class MonitorRecommender(Recommender):
             for monitor in self._data:
                 if monitor._size < 26 and monitor._size > 23 and monitor._motion >= 7:
                     self._recommended.append(monitor)
-            self._recommended = sorted(
-                self._recommended, key=lambda monitor: monitor._motion, reverse=True
-            )
+            # THIS NEEDS TO BE UPDATED
+            # self._recommended = sorted(
+            #     self._recommended, key=lambda monitor: monitor._motion, reverse=True
+            # )
 
         if self._print:
             self._recommended = [
