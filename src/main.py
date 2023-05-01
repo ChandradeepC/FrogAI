@@ -291,48 +291,53 @@ class MonitorRecommender(Recommender):
 
     def _filter(self):
         new = []
-        for monitor in self._recommended:
-            # Check gpu
-            if "pc" in self._type and MonitorRecommender._gpu_order.index(
-                self._gpu
-            ) > MonitorRecommender._gpu_order.index(monitor._min_gpu):
-                continue
-            elif self._size != "nopref" and self._size != monitor._size:
-                continue
-            elif self._curve != "nopref" and self._curve != monitor._curve:
-                continue
-            elif self._aspect != "nopref" and self._aspect != monitor._aspect:
-                continue
-            elif self._size != "nopref" and self._size != monitor._size:
-                continue
-            elif self._min_rr != "nopref" and self._min_rr > monitor._rr:
-                continue
-            elif self._panel != "nopref" and self._panel not in monitor._panel:
-                continue
-            elif self._backlight != "nopref" and self._backlight not in monitor._panel:
-                continue
-            elif self._budget < 0.9 * monitor._cost:
-                continue
-            elif self._type != "mac" and (
-                "Apple" in monitor._name or "UltraFine" in monitor._name
-            ):
-                continue
-            elif "console" in self._type and monitor._aspect != "Wide":
-                continue
-            elif self._hdr != "nopref" and self._hdr != monitor._hdr:
-                continue
-            elif (
-                self._calibrated != "nopref"
-                and "calibration" not in monitor._special
-                and "calibrated" not in monitor._special
-            ):
-                continue
-            elif self._finish != "nopref" and self._finish not in monitor._special:
-                continue
-            elif self._hub != "nopref" and "hub" not in monitor._special:
-                continue
-            else:
-                new.append(monitor)
+
+        if self._budget:
+            for monitor in self._recommended:
+                # Check gpu
+                if "pc" in self._type and MonitorRecommender._gpu_order.index(
+                    self._gpu
+                ) > MonitorRecommender._gpu_order.index(monitor._min_gpu):
+                    continue
+                elif self._size != "nopref" and self._size != monitor._size:
+                    continue
+                elif self._curve != "nopref" and self._curve != monitor._curve:
+                    continue
+                elif self._aspect != "nopref" and self._aspect != monitor._aspect:
+                    continue
+                elif self._size != "nopref" and self._size != monitor._size:
+                    continue
+                elif self._min_rr != "nopref" and self._min_rr > monitor._rr:
+                    continue
+                elif self._panel != "nopref" and self._panel not in monitor._panel:
+                    continue
+                elif (
+                    self._backlight != "nopref"
+                    and self._backlight not in monitor._panel
+                ):
+                    continue
+                elif self._budget < 0.9 * monitor._cost:
+                    continue
+                elif self._type != "mac" and (
+                    "Apple" in monitor._name or "UltraFine" in monitor._name
+                ):
+                    continue
+                elif "console" in self._type and monitor._aspect != "Wide":
+                    continue
+                elif self._hdr != "nopref" and self._hdr != monitor._hdr:
+                    continue
+                elif (
+                    self._calibrated != "nopref"
+                    and "calibration" not in monitor._special
+                    and "calibrated" not in monitor._special
+                ):
+                    continue
+                elif self._finish != "nopref" and self._finish not in monitor._special:
+                    continue
+                elif self._hub != "nopref" and "hub" not in monitor._special:
+                    continue
+                else:
+                    new.append(monitor)
 
         self._recommended = new
 
@@ -412,7 +417,6 @@ class MonitorRecommender(Recommender):
                 monitor for monitor in self._recommended if monitor._adobe_rgb == "Yes"
             ]
 
-        # Colorimeter addition and final filter
         self._filter()
 
         return self._to_json(5)  # , self._colorimeter
