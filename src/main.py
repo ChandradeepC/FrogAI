@@ -218,6 +218,7 @@ class MonitorRecommender(Recommender):
             self._edit = MonitorRecommender._scale_encoder[input["edit"]]
             self._print = MonitorRecommender._scale_encoder[input["print"]]
             self._grade = MonitorRecommender._scale_encoder[input["grade"]]
+            self._esports = MonitorRecommender._scale_encoder[input["esports"]]
 
             # Filters
             self._aspect = input["aspect"]
@@ -311,6 +312,8 @@ class MonitorRecommender(Recommender):
                     continue
                 elif self._panel != "nopref" and self._panel not in monitor._panel:
                     continue
+                elif self._res != "nopref" and self._res != monitor._res:
+                    continue
                 elif (
                     self._backlight != "nopref"
                     and self._backlight not in monitor._panel
@@ -357,7 +360,28 @@ class MonitorRecommender(Recommender):
 
         return self
 
+    #       Comp -> 0.8 motion + 0.1 pq + 0.1 sharp
+    #       Cas -> 0.45 motion + 0.3 pq + 0.25 sharp
+    #       Media -> 0.1 motion + 0.6 pq + 0.2 sharp
+    #       Work -> 0.1 motion + 0 pq + 0.9 sharp
+
     def _basic_recommend(self):
+        for monitor in self._recommended:
+            monitor._score = (
+                self._comp
+                * (0.9 * monitor._motion + 0 * monitor._pq + 0.1 * monitor._sharp)
+                + self._casual
+                * (0.45 * monitor._motion + 0.3 * monitor._pq + 0.25 * monitor._sharp)
+                + self._media
+                * (0 * monitor._motion + 0.7 * monitor._pq + 0.3 * monitor._sharp)
+                + self._text
+                * (0 * monitor._motion + 0 * monitor._pq + 1 * monitor._sharp)
+            )
+            # print(monitor._name, monitor._score)
+
+        self._recommended = sorted(
+            self._recommended, key=lambda monitor: monitor._score, reverse=True
+        )
         return self
 
     def _to_json(self, x):
@@ -403,15 +427,23 @@ class MonitorRecommender(Recommender):
         else:
             self._basic_recommend()
 
-        # Color grading
+        # Special handling:
+
         if self._grade:
             self._recommended = [
                 monitor
                 for monitor in self._data
                 if "hardware calibration" in monitor._special
             ]
+        elif self._esports:
+            self._recommended = []
+            for monitor in self._data:
+                if monitor._size < 26 and monitor._size > 23 and monitor._motion >= 7:
+                    self._recommended.append(monitor)
+            self._recommended = sorted(
+                self._recommended, key=lambda monitor: monitor._motion, reverse=True
+            )
 
-        # Print intersection
         if self._print:
             self._recommended = [
                 monitor for monitor in self._recommended if monitor._adobe_rgb == "Yes"
