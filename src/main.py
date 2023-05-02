@@ -362,6 +362,7 @@ class MonitorRecommender(Recommender):
 
         return self
 
+    # implement minimums and sd
     def _advanced_recommend(self):
         for monitor in self._recommended:
             monitor._score = (
@@ -553,4 +554,4 @@ class MonitorRecommender(Recommender):
 
         self._filter()
 
-        return self._to_json(7)  # , self._colorimeter
+        return self._to_json(7)
