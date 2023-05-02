@@ -398,12 +398,12 @@ class MonitorRecommender(Recommender):
                     )
                     + self._casual
                     * (
-                        0.15 * monitor._persistence
-                        + 0.225 * monitor._response
-                        + 0.325 * monitor._contrast
-                        + 0.075 * monitor._brightness
-                        + 0.075 * monitor._volume
-                        + 0.15 * monitor._sharp
+                        0.05 * monitor._persistence
+                        + 0.3 * monitor._response
+                        + 0.45 * monitor._contrast
+                        + 0 * monitor._brightness
+                        + 0 * monitor._volume
+                        + 0.2 * monitor._sharp
                         + 0 * monitor._subpixel
                     )
                     + self._media
@@ -444,10 +444,10 @@ class MonitorRecommender(Recommender):
                     * (
                         0.15 * monitor._persistence
                         + 0.15 * monitor._response
-                        + 0.2 * monitor._contrast
-                        + 0.05 * monitor._brightness
+                        + 0.225 * monitor._contrast
+                        + 0 * monitor._brightness
                         + 0.35 * monitor._volume
-                        + 0.1 * monitor._sharp
+                        + 0.125 * monitor._sharp
                         + 0 * monitor._subpixel
                     )
                     + self._media
@@ -540,12 +540,18 @@ class MonitorRecommender(Recommender):
         elif self._esports:
             self._recommended = []
             for monitor in self._data:
-                if monitor._size < 26 and monitor._size > 23 and monitor._motion >= 7:
+                if (
+                    monitor._size < 26
+                    and monitor._size > 23
+                    and monitor._persistence >= 7
+                ):
                     self._recommended.append(monitor)
             # THIS NEEDS TO BE UPDATED
-            # self._recommended = sorted(
-            #     self._recommended, key=lambda monitor: monitor._motion, reverse=True
-            # )
+            self._recommended = sorted(
+                self._recommended,
+                key=lambda monitor: monitor._persistence,
+                reverse=True,
+            )
 
         if self._print:
             self._recommended = [
