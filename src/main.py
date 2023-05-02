@@ -382,49 +382,95 @@ class MonitorRecommender(Recommender):
 
     # needs to be updated later
     def _basic_recommend(self):
-        for monitor in self._recommended:
-            monitor._score = (
-                self._comp
-                * (
-                    0 * monitor._persistence
-                    + 0 * monitor._response
-                    + 0 * monitor._contrast
-                    + 0 * monitor._brightness
-                    + 0 * monitor._volume
-                    + 0 * monitor._sharp
-                    + 0 * monitor._subpixel
+        if self._hdr != "yes":
+            for monitor in self._recommended:
+                monitor._score = (
+                    self._comp
+                    * (
+                        0.45 * monitor._persistence
+                        + 0.35 * monitor._response
+                        + 0.05 * monitor._contrast
+                        + 0.05 * monitor._brightness
+                        + 0 * monitor._volume
+                        + 0.1 * min(monitor._sharp, 5)
+                        + 0 * monitor._subpixel
+                    )
+                    + self._casual
+                    * (
+                        0.15 * monitor._persistence
+                        + 0.225 * monitor._response
+                        + 0.325 * monitor._contrast
+                        + 0 * monitor._brightness
+                        + 0.15 * monitor._volume
+                        + 0.15 * monitor._sharp
+                        + 0 * monitor._subpixel
+                    )
+                    + self._media
+                    * (
+                        0 * monitor._persistence
+                        + 0.1 * monitor._response
+                        + 0.5 * monitor._contrast
+                        + 0.1 * monitor._brightness
+                        + 0 * monitor._volume
+                        + 0.3 * monitor._sharp
+                        + 0 * monitor._subpixel
+                    )
+                    + self._text
+                    * (
+                        0 * monitor._persistence
+                        + 0 * monitor._response
+                        + 0 * monitor._contrast
+                        + 0 * monitor._brightness
+                        + 0 * monitor._volume
+                        + 0 * monitor._sharp
+                        + 1 * monitor._subpixel
+                    )
                 )
-                + self._casual
-                * (
-                    0 * monitor._persistence
-                    + 0 * monitor._response
-                    + 0 * monitor._contrast
-                    + 0 * monitor._brightness
-                    + 0 * monitor._volume
-                    + 0 * monitor._sharp
-                    + 0 * monitor._subpixel
+        else:
+            for monitor in self._recommended:
+                monitor._score = (
+                    self._comp
+                    * (
+                        0.45 * monitor._persistence
+                        + 0.35 * monitor._response
+                        + 0.05 * monitor._contrast
+                        + 0.05 * monitor._brightness
+                        + 0 * monitor._volume
+                        + 0.1 * min(monitor._sharp, 5)
+                        + 0 * monitor._subpixel
+                    )
+                    + self._casual
+                    * (
+                        0.15 * monitor._persistence
+                        + 0.15 * monitor._response
+                        + 0.2 * monitor._contrast
+                        + 0 * monitor._brightness
+                        + 0.4 * monitor._volume
+                        + 0.1 * monitor._sharp
+                        + 0 * monitor._subpixel
+                    )
+                    + self._media
+                    * (
+                        0 * monitor._persistence
+                        + 0.05 * monitor._response
+                        + 0.35 * monitor._contrast
+                        + 0.20 * monitor._brightness
+                        + 0.25 * monitor._volume
+                        + 0.15 * monitor._sharp
+                        + 0 * monitor._subpixel
+                    )
+                    + self._text
+                    * (
+                        0 * monitor._persistence
+                        + 0 * monitor._response
+                        + 0 * monitor._contrast
+                        + 0 * monitor._brightness
+                        + 0 * monitor._volume
+                        + 0 * monitor._sharp
+                        + 1 * monitor._subpixel
+                    )
                 )
-                + self._media
-                * (
-                    0 * monitor._persistence
-                    + 0 * monitor._response
-                    + 0 * monitor._contrast
-                    + 0 * monitor._brightness
-                    + 0 * monitor._volume
-                    + 0 * monitor._sharp
-                    + 0 * monitor._subpixel
-                )
-                + self._text
-                * (
-                    0 * monitor._persistence
-                    + 0 * monitor._response
-                    + 0 * monitor._contrast
-                    + 0 * monitor._brightness
-                    + 0 * monitor._volume
-                    + 0 * monitor._sharp
-                    + 0 * monitor._subpixel
-                )
-            )
+
             # print(monitor._name, monitor._score)
 
         self._recommended = sorted(
