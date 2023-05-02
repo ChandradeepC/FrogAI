@@ -380,9 +380,9 @@ class MonitorRecommender(Recommender):
 
         return self
 
-    # needs to be updated later
+    # Implement minimums and sd
     def _basic_recommend(self):
-        if self._hdr != "yes":
+        if self._hdr != "Yes":
             for monitor in self._recommended:
                 monitor._score = (
                     self._comp
@@ -400,19 +400,19 @@ class MonitorRecommender(Recommender):
                         0.15 * monitor._persistence
                         + 0.225 * monitor._response
                         + 0.325 * monitor._contrast
-                        + 0 * monitor._brightness
-                        + 0.15 * monitor._volume
+                        + 0.075 * monitor._brightness
+                        + 0.075 * monitor._volume
                         + 0.15 * monitor._sharp
                         + 0 * monitor._subpixel
                     )
                     + self._media
                     * (
                         0 * monitor._persistence
-                        + 0.1 * monitor._response
-                        + 0.5 * monitor._contrast
+                        + 0 * monitor._response
+                        + 0.55 * monitor._contrast
                         + 0.1 * monitor._brightness
                         + 0 * monitor._volume
-                        + 0.3 * monitor._sharp
+                        + 0.35 * monitor._sharp
                         + 0 * monitor._subpixel
                     )
                     + self._text
@@ -444,15 +444,15 @@ class MonitorRecommender(Recommender):
                         0.15 * monitor._persistence
                         + 0.15 * monitor._response
                         + 0.2 * monitor._contrast
-                        + 0 * monitor._brightness
-                        + 0.4 * monitor._volume
+                        + 0.05 * monitor._brightness
+                        + 0.35 * monitor._volume
                         + 0.1 * monitor._sharp
                         + 0 * monitor._subpixel
                     )
                     + self._media
                     * (
                         0 * monitor._persistence
-                        + 0.05 * monitor._response
+                        + 0 * monitor._response
                         + 0.35 * monitor._contrast
                         + 0.20 * monitor._brightness
                         + 0.25 * monitor._volume
@@ -553,4 +553,4 @@ class MonitorRecommender(Recommender):
 
         self._filter()
 
-        return self._to_json(5)  # , self._colorimeter
+        return self._to_json(7)  # , self._colorimeter
