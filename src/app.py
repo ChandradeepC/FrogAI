@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from main import MonitorRecommender
+from recommender import MonitorRecommender
 from flask_cors import CORS
 
 

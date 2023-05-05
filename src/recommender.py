@@ -535,7 +535,7 @@ class MonitorRecommender(Recommender):
             self._recommended = [
                 monitor
                 for monitor in self._data
-                if "hardware calibration" in monitor._special
+                if "hardware calibration" in monitor._special.lower()
             ]
         elif self._esports:
             self._recommended = []
@@ -560,4 +560,4 @@ class MonitorRecommender(Recommender):
 
         self._filter()
 
-        return self._to_json(7)
+        return self._to_json(5)
