@@ -480,12 +480,50 @@ class MonitorRecommender(Recommender):
         return self
 
     def _categorize_perf(self):
+        for monitor in self._recommended:
+            motion = 0.5 * monitor._persistence + 0.5 * monitor._response
+
+            if 0 <= motion < 2:
+                motioncat = "Bad"
+            elif 2 <= motion < 5:
+                motioncat = "Mediocre"
+            elif 5 <= motion < 7:
+                motioncat = "Good"
+            elif 7 <= motion <= 10:
+                motioncat = "Excellent"
+
+            pq = 0.7 * monitor._contrast + 0.3 * monitor._volume
+
+            if 0 <= pq < 2:
+                pqcat = "Bad"
+            elif 2 <= pq < 5:
+                pqcat = "Mediocre"
+            elif 5 <= pq < 8:
+                pqcat = "Good"
+            elif 8 <= pq <= 10:
+                pqcat = "Excellent"
+
+            if 0 <= monitor._subpixel < 2:
+                textcat = "Bad"
+            elif 2 <= monitor._subpixel < 5:
+                textcat = "Mediocre"
+            elif 5 <= monitor._subpixel < 7:
+                textcat = "Good"
+            elif 7 <= monitor._subpixel <= 10:
+                textcat = "Excellent"
+
+            monitor._persistence = motioncat
+            monitor._contrast = pqcat
+            monitor._subpixel = textcat
+
         return self
 
     def _to_json(self, x):
         self._recommended = (
             self._recommended[:x] if len(self._recommended) > x else self._recommended
         )
+
+        self._categorize_perf()
 
         monitor_list = []
         for monitor in self._recommended:
