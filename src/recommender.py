@@ -11,6 +11,7 @@ import math
 sys.path.insert(0, "..")
 
 import pandas as pd
+import numpy as np
 
 
 class Monitor:
@@ -335,7 +336,7 @@ class MonitorRecommender(Recommender):
                     and self._backlight not in monitor._panel
                 ):
                     continue
-                elif self._budget < 0.9 * monitor._cost:
+                elif self._budget < 0.85714 * (monitor._cost):
                     continue
                 elif self._type != "mac" and (
                     "Apple" in monitor._name or "UltraFine" in monitor._name
@@ -354,6 +355,14 @@ class MonitorRecommender(Recommender):
                 elif self._finish != "nopref" and self._finish not in monitor._special:
                     continue
                 elif self._hub != "nopref" and "hub" not in monitor._special:
+                    continue
+                elif monitor._score == 0:
+                    continue
+                elif self._comp > 0.1 and (
+                    monitor._aspect != "Wide" or monitor._rr < 240
+                ):
+                    continue
+                elif self._text > 0.1 and monitor._subpixel < 3:
                     continue
                 else:
                     new.append(monitor)
@@ -381,17 +390,17 @@ class MonitorRecommender(Recommender):
 
         return self
 
-    # Implement minimums and sd
     def _basic_recommend(self):
         if self._hdr != "Yes":
             for monitor in self._recommended:
                 monitor._score = (
-                    self._comp
+                    1.5
+                    * self._comp
                     * (
                         0.45 * monitor._persistence
                         + 0.35 * monitor._response
-                        + 0.05 * monitor._contrast
-                        + 0.05 * monitor._brightness
+                        + 0.1 * monitor._contrast
+                        + 0 * monitor._brightness
                         + 0 * monitor._volume
                         + 0.1 * min(monitor._sharp, 5)
                         + 0 * monitor._subpixel
@@ -416,7 +425,8 @@ class MonitorRecommender(Recommender):
                         + 0.35 * monitor._sharp
                         + 0 * monitor._subpixel
                     )
-                    + self._text
+                    + 0.5
+                    * self._text
                     * (
                         0 * monitor._persistence
                         + 0 * monitor._response
@@ -430,7 +440,8 @@ class MonitorRecommender(Recommender):
         else:
             for monitor in self._recommended:
                 monitor._score = (
-                    self._comp
+                    1.5
+                    * self._comp
                     * (
                         0.45 * monitor._persistence
                         + 0.35 * monitor._response
@@ -460,7 +471,8 @@ class MonitorRecommender(Recommender):
                         + 0.15 * monitor._sharp
                         + 0 * monitor._subpixel
                     )
-                    + self._text
+                    + 0.5
+                    * self._text
                     * (
                         0 * monitor._persistence
                         + 0 * monitor._response
@@ -468,7 +480,7 @@ class MonitorRecommender(Recommender):
                         + 0 * monitor._brightness
                         + 0 * monitor._volume
                         + 0 * monitor._sharp
-                        + 1 * monitor._subpixel
+                        + 0.5 * monitor._subpixel
                     )
                 )
 
@@ -481,15 +493,16 @@ class MonitorRecommender(Recommender):
 
     def _categorize_perf(self):
         for monitor in self._recommended:
-            motion = 0.5 * monitor._persistence + 0.5 * monitor._response
+            # motion = 0.5 * monitor._persistence + 0.5 * monitor._response
+            motion = min(monitor._persistence, monitor._response)
 
             if 0 <= motion < 2:
                 motioncat = "Bad"
             elif 2 <= motion < 5:
                 motioncat = "Mediocre"
-            elif 5 <= motion < 7:
+            elif 5 <= motion < 7.5:
                 motioncat = "Good"
-            elif 7 <= motion <= 10:
+            elif 7.5 <= motion <= 10:
                 motioncat = "Excellent"
 
             pq = 0.7 * monitor._contrast + 0.3 * monitor._volume
@@ -528,7 +541,7 @@ class MonitorRecommender(Recommender):
         monitor_list = []
         for monitor in self._recommended:
             monitor_dict = {
-                "name": monitor._name,
+                "name": monitor._name,  # + " " + str(round(monitor._score, 2)),
                 "persistence": monitor._persistence,
                 "response": monitor._response,
                 "contrast": monitor._contrast,
@@ -584,7 +597,7 @@ class MonitorRecommender(Recommender):
                     and monitor._persistence >= 7
                 ):
                     self._recommended.append(monitor)
-            # THIS NEEDS TO BE UPDATED
+
             self._recommended = sorted(
                 self._recommended,
                 key=lambda monitor: monitor._persistence,
@@ -598,4 +611,4 @@ class MonitorRecommender(Recommender):
 
         self._filter()
 
-        return self._to_json(5)
+        return self._to_json(10)
