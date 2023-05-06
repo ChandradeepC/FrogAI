@@ -1,7 +1,7 @@
 .LandingPage {
     display: flex;
     justify-content: space-between;
-    background-color: #ffffff;
+    background-color: transparent;
     flex-direction: column;
     align-items: center;
     margin-top: 5rem;
@@ -9,6 +9,32 @@
     max-width: 100rem;
     padding: 0 2rem;
 }
+
+.landing-wrapper {
+    background-image: url('assets/ten3.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* .footer-container {
+    display: flex;
+    position: relative;
+    height: 3rem;
+    padding: 0 2rem;
+    margin-top: 10rem;
+    overflow: hidden;
+    border-top: 1px solid #d2d2d2;
+    /* z-index: 999; */
+/* overscroll-behavior: contain; 
+}
+
+.bottom-text {
+    display: flex;
+    font-size: 1.1rem;
+    color: #727272;
+    margin-top: 0rem;
+}  */
 
 /* Heading style */
 .LandingPage h2 {
@@ -18,15 +44,18 @@
     font-weight: bold;
     align-self: center;
     margin-bottom: 5rem;
+    color: #232323;
 }
 
 /* List style */
 .LandingPage ul {
     justify-content: space-between;
+    background-color: rgba(0, 0, 0, 1); /* semi-transparent white */
+    padding: 1rem;
     height: auto;
-    /* border: 1px solid #e4e4e4; */
     border-radius: 10px;
     list-style: disc;
+    color: #fff;
     margin: 0;
     padding: 0 0 0 20px;
     max-width: 60rem;
@@ -50,7 +79,7 @@
     border-radius: 20px;
     border: none;
     /* padding: 1rem 2rem; */
-    margin-top: 2rem;
+    margin-top: 55rem;
     font-size: 1rem;
     font-weight: 600;
     font-family: inherit;
@@ -72,11 +101,6 @@ button:focus-visible {
 }
 
 @media (prefers-color-scheme: dark) {
-    .LandingPage {
-        /* background-color:  #0d1117; */
-        background-color: #020304;
-    }
-
     /* .LandingPage ul {
       border: 1px solid #434343;
     } */
