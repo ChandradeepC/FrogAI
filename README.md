@@ -1,8 +1,9 @@
-# FrogAI: Monitor Recommendation Flask API
+# FrogAI: Monitor Recommendations
 
-[![Scc Count Badge](https://sloc.xyz/github/theNullCrown/FrogAI/?category=code)](https://github.com/theNullCrown/FrogAI/)
+[![Scc Count Badge](https://sloc.xyz/github/theNullCrown/FrogAI/?category=code,api,vite-project)](https://github.com/theNullCrown/FrogAI/)
 
-Trained on data from r/monitors subreddit and MonitorEnthusiasts discord server
+
+A web application for providing high quality up-to-date monitor recommendations.
 
 ## Setup
 
