@@ -364,6 +364,8 @@ class MonitorRecommender(Recommender):
                     continue
                 elif self._text > 0.1 and monitor._subpixel < 3:
                     continue
+                elif self._casual > 0.1 and monitor._rr < 120:
+                    continue
                 else:
                     new.append(monitor)
 
@@ -483,8 +485,6 @@ class MonitorRecommender(Recommender):
                         + 0.5 * monitor._subpixel
                     )
                 )
-
-            # print(monitor._name, monitor._score)
 
         self._recommended = sorted(
             self._recommended, key=lambda monitor: monitor._score, reverse=True
@@ -611,4 +611,4 @@ class MonitorRecommender(Recommender):
 
         self._filter()
 
-        return self._to_json(10)
+        return self._to_json(8)
