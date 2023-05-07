@@ -356,7 +356,7 @@ class MonitorRecommender(Recommender):
                     continue
                 elif self._hub != "nopref" and "hub" not in monitor._special:
                     continue
-                elif monitor._score == 0:
+                elif not self._esports and not self._grade and monitor._score == 0:
                     continue
                 elif self._comp > 0.1 and (
                     monitor._aspect != "Wide" or monitor._rr < 240
@@ -590,7 +590,8 @@ class MonitorRecommender(Recommender):
                 for monitor in self._data
                 if "hardware calibration" in monitor._special.lower()
             ]
-        elif self._esports:
+
+        if self._esports:
             self._recommended = []
             for monitor in self._data:
                 if (
