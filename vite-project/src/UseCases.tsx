@@ -20,7 +20,7 @@ const UseCasesForm: React.FC<Props> = ({
 }) => {
     return (
         <div className="form-container">
-            <h2>Use cases</h2>
+            <h2>Use cases*</h2>
             <div className="field-grid">
                 <div className="field">
                     <label htmlFor="casual">Casual gaming:</label>

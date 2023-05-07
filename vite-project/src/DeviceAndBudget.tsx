@@ -96,7 +96,7 @@ const DeviceAndBudgetForm: React.FC<Props> = ({
 
     return (
         <div className="form-container">
-            <h2>Platform and budget</h2>
+            <h2>Platform and budget*</h2>
             <div className="field-grid">
                 <div className="field">
                     <label htmlFor="country">Location:</label>

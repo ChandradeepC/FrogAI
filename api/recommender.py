@@ -482,7 +482,7 @@ class MonitorRecommender(Recommender):
                         + 0 * monitor._brightness
                         + 0 * monitor._volume
                         + 0 * monitor._sharp
-                        + 0.5 * monitor._subpixel
+                        + 1 * monitor._subpixel
                     )
                 )
 
