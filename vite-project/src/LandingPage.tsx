@@ -4,12 +4,12 @@ import './LandingPage.css';
 import frogaiLogo from './assets/frogai.jpg';
 
 const LandingPage: React.FC = () => {
-    useEffect(() => {
-        document.body.classList.add('landing-wrapper');
-        return () => {
-            document.body.classList.remove('landing-wrapper');
-        };
-    }, []);
+    // useEffect(() => {
+    //     document.body.classList.add('landing-wrapper');
+    //     return () => {
+    //         document.body.classList.remove('landing-wrapper');
+    //     };
+    // }, []);
 
     return (
         <div>
@@ -32,7 +32,7 @@ const LandingPage: React.FC = () => {
                 </div>
                 <div className="LandingPage">
                     <h2>The best monitor recommender in the world.</h2>
-                    {/* <ul>
+                    <ul>
                         <li>
                             Trained on thousands of conversations in Monitor
                             Enthusiasts
@@ -65,7 +65,7 @@ const LandingPage: React.FC = () => {
                             Always up-to-date with the latest developments in
                             the monitor sphere
                         </li>
-                    </ul> */}
+                    </ul>
                     <Link to="/recommender">
                         <button className="button">Get Started</button>
                     </Link>

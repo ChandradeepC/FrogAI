@@ -364,7 +364,9 @@ class MonitorRecommender(Recommender):
                     continue
                 elif self._text > 0.1 and monitor._subpixel < 3:
                     continue
-                elif self._casual > 0.1 and monitor._rr < 120:
+                elif self._casual > 0.1 and (
+                    monitor._rr < 120 or "1920" in monitor._res or monitor._contrast < 2
+                ):
                     continue
                 else:
                     new.append(monitor)
