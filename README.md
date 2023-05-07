@@ -1,6 +1,6 @@
 # FrogAI: Monitor Recommendations
 
-[![Scc Count Badge](https://sloc.xyz/github/theNullCrown/FrogAI/?category=code,api,vite-project)](https://github.com/theNullCrown/FrogAI/)
+[![Scc Count Badge](https://sloc.xyz/github/theNullCrown/FrogAI/?category=code,api,vite-project/src)](https://github.com/theNullCrown/FrogAI/)
 
 A web application for providing high quality up-to-date monitor recommendations.
 
