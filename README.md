@@ -2,7 +2,6 @@
 
 [![Scc Count Badge](https://sloc.xyz/github/theNullCrown/FrogAI/?category=code,api,vite-project)](https://github.com/theNullCrown/FrogAI/)
 
-
 A web application for providing high quality up-to-date monitor recommendations.
 
 ## Setup
@@ -17,7 +16,7 @@ Fork the repository before cloning it.
     - Mac or Linux: `source venv/bin/activate`
     - Windows: `venv\Scripts\activate`
 4. Install the required packages: `pip install -r requirements.txt`
-5. Run the Flask server: `python api/app.py`
+5. Run the gunicorn production server: `gunicorn api.wsgi:app`
 
 ### Frontend
 
