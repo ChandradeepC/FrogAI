@@ -40,12 +40,13 @@ const SpecialForm: React.FC<Props> = ({
                 )}
             <div className="field-grid">
                 <div className="field">
-                    <label htmlFor="esports">Esports:</label>
+                    <label htmlFor="esports">Professional Esports:</label>
                     <select
                         id="esports"
                         name="esports"
                         value={esports}
                         onChange={handleInputChange}
+                        disabled={grade === 'yes'}
                     >
                         <option value="no">No</option>
                         <option value="yes">Yes</option>
@@ -82,6 +83,7 @@ const SpecialForm: React.FC<Props> = ({
                         name="grade"
                         value={grade}
                         onChange={handleInputChange}
+                        disabled={esports === 'yes'}
                     >
                         <option value="no">No</option>
                         <option value="yes">Yes</option>

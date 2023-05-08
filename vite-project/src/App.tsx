@@ -192,9 +192,15 @@ const App = () => {
                 break;
             case 'grade':
                 setGrade(value);
+                if (value === 'yes') {
+                    setEsports('no');
+                }
                 break;
             case 'esports':
                 setEsports(value);
+                if (value === 'yes') {
+                    setGrade('no');
+                }
                 break;
             //-------------------------------------
             case 'aspect':
