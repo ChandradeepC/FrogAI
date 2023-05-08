@@ -8,20 +8,24 @@ A web application for providing high quality up-to-date monitor recommendations.
 
 Fork the repository before cloning it.
 
-### Backend
+1. Setup Node.js:
 
-1. Install python@3.9 or higher
-2. Create a virtual environment: `python3 -m venv venv`
-3. Activate the environment:
-    - Mac or Linux: `source venv/bin/activate`
-    - Windows: `venv\Scripts\activate`
-4. Install the required packages: `pip install -r requirements.txt`
-5. Run the gunicorn production server: `gunicorn api.wsgi:app`
+-   Install Node.js
+-   Enter the vite-project directory: `cd vite-project`
+-   Install the required packages: `npm install`
 
-### Frontend
+2. Start the frontend:
 
-1. Install Node.js
-2. Enter the vite-project directory: `cd vite-project`
-3. Install the required packages: `npm install`
-4. Run the frontend: `npm run dev`
-5. Open the address of the frontend in your browser
+-   Build the frontend for production use: `npm run build` or
+-   Run the Vite development server: `npm run dev`
+
+3. Setup Python environment
+
+-   Install python@3.9 or higher
+-   Create a virtual environment: `python3 -m venv venv`
+-   Activate the environment:
+    -   Mac or Linux: `source venv/bin/activate`
+    -   Windows: `venv\Scripts\activate`
+-   Install the required packages: `pip install -r requirements.txt`
+
+4. Run the production server: `gunicorn api.wsgi:app`
