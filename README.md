@@ -12,10 +12,11 @@ Fork the repository before cloning it.
 2. Enter the vite-project directory: `cd vite-project`
 3. Install the required packages: `npm install`
 4. Build the frontend for production use: `npm run build`
-5. Install python@3.9 or higher
-6. Create a virtual environment: `python3 -m venv venv`
-7. Activate the environment:
+5. Return to the top-level directory: `cd ..`
+6. Install python@3.9 or higher
+7. Create a virtual environment: `python3 -m venv venv`
+8. Activate the environment:
     - Mac or Linux: `source venv/bin/activate`
     - Windows: `venv\Scripts\activate`
-8. Install the required packages: `pip install -r requirements.txt`
-9. Run the production server: `gunicorn api.wsgi:app`
+9. Install the required packages: `pip install -r requirements.txt`
+10. Run the production server: `gunicorn api.wsgi:app`
