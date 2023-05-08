@@ -1,14 +1,15 @@
-from flask import Flask, jsonify, request
-from flask_cors import CORS
+from flask import Flask, jsonify, render_template, request, send_from_directory
+from flask_cors import CORS, cross_origin
 
 from api.recommender import MonitorRecommender
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder="../vite-project/dist", static_url_path="")
     cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     @app.route("/api/monitor-recommendations", methods=["OPTIONS", "POST"])
+    @cross_origin()
     def monitor_recommendations():
         if request.method == "OPTIONS":
             headers = {
@@ -22,5 +23,10 @@ def create_app():
         recommender = MonitorRecommender(input_data)
 
         return recommender.recommend()
+
+    @app.route("/")
+    @cross_origin()
+    def serve():
+        return send_from_directory(app.static_folder, "index.html")
 
     return app
