@@ -14,14 +14,9 @@ Fork the repository before cloning it.
 -   Enter the vite-project directory: `cd vite-project`
 -   Install the required packages: `npm install`
 
-2. Start the frontend:
+2. Build the frontend:
 
--   Build the frontend for production use: `npm run build` (no need to start the
-    frontend seperately if you do this, Gunicorn will serve the frontend as
-    well, but you lose the ability to hot reload and need to build after every
-    change) OR
--   Run the Vite development server: `npm run dev` (will need to start frontend
-    seperately everytime but supports hot reloading)
+-   Build the frontend for production use: `npm run build`
 
 3. Setup Python environment
 
