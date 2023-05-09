@@ -243,6 +243,17 @@ const App = () => {
 
     const handleModeToggle = () => {
         setMode(mode === 'basic' ? 'advanced' : 'basic');
+        setResponse('not');
+        setBrightness('not');
+        setContrast('not');
+        setSharp('not');
+        setPersistence('not');
+        setVolume('not');
+        setSubpixel('not');
+        setCasual('not');
+        setText('not');
+        setMedia('not');
+        setComp('not');
     };
 
     return (
