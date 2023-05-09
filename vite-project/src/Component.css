@@ -78,6 +78,12 @@ select:focus {
     }
 }
 
+@media (max-width: 40rem) {
+    .form-container {
+        width: 35vh;
+    }
+}
+
 @media (prefers-color-scheme: dark) {
     .form-container {
         color: white;

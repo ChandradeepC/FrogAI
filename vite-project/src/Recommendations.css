@@ -133,6 +133,12 @@
     margin-bottom: 1rem;
 }
 
+@media (max-width: 40rem) {
+    .monitor-box p {
+        margin-bottom: 0.3rem;
+    }
+}
+
 @media (prefers-color-scheme: dark) {
     .monitor-box {
         color: white;

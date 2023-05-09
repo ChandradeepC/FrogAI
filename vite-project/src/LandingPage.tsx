@@ -25,13 +25,16 @@ const LandingPage: React.FC = () => {
                         <div className="logo-text">
                             <h1 className="header">FrogAI</h1>
                             <p className="tagline">
-                                Monitor recommendations v1.0
+                                Monitor recommendations v1.0.1
                             </p>
                         </div>
                     </div>
                 </div>
                 <div className="LandingPage">
                     <h2>The best monitor recommender in the world.</h2>
+                    <Link to="/recommender">
+                        <button className="button">Get Started</button>
+                    </Link>
                     <ul>
                         <li>
                             Trained on thousands of conversations in Monitor
@@ -66,9 +69,9 @@ const LandingPage: React.FC = () => {
                             the monitor sphere
                         </li>
                     </ul>
-                    <Link to="/recommender">
+                    {/* <Link to="/recommender">
                         <button className="button">Get Started</button>
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
             <div className="footer-container">

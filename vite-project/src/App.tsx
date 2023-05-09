@@ -260,7 +260,7 @@ const App = () => {
                             <div className="logo-text">
                                 <h1 className="header">FrogAI</h1>
                                 <p className="tagline">
-                                    Monitor recommendations v1.0
+                                    Monitor recommendations v1.0.1
                                 </p>
                             </div>
                         </div>
