@@ -95,7 +95,6 @@ class MonitorRecommender(Recommender):
         "3090ti",
         "6950xt",
         "4070ti",
-        "4090 laptop",
         "6900xt",
         "3090",
         "3080ti",
@@ -167,6 +166,7 @@ class MonitorRecommender(Recommender):
     ]
 
     _laptop_gpu_order = {
+        "4090",
         "4080",
         "3080ti",
         "3080",
@@ -200,9 +200,9 @@ class MonitorRecommender(Recommender):
             input = {}
 
         else:
-            self._gpu = input["pcGpu"]
-            if self._gpu == "no":
-                self._gpu = False
+            self._gpu = MonitorRecommender._scale_encoder[input["pcGpu"]]
+            # if self._gpu == "no":
+            #     self._gpu = False
             self._console = input["consoles"]
             if self._console == "no":
                 self._console = False
@@ -313,11 +313,11 @@ class MonitorRecommender(Recommender):
         if self._budget:
             for monitor in self._recommended:
                 # Check gpu
-                if "pc" in self._type and MonitorRecommender._gpu_order.index(
-                    self._gpu
-                ) > MonitorRecommender._gpu_order.index(monitor._min_gpu):
-                    continue
-                elif self._size != "nopref" and self._size != monitor._size:
+                # if "pc" in self._type and MonitorRecommender._gpu_order.index(
+                #     self._gpu
+                # ) > MonitorRecommender._gpu_order.index(monitor._min_gpu):
+                #     continue
+                if self._size != "nopref" and self._size != monitor._size:
                     continue
                 elif self._curve != "nopref" and self._curve != monitor._curve:
                     continue
@@ -369,6 +369,28 @@ class MonitorRecommender(Recommender):
                     or (self._budget > 500 and "1920" in monitor._res)
                     or monitor._contrast < 2
                 ):
+                    continue
+                elif self._persistence > 0.1 and monitor._rr < 240:
+                    continue
+                elif self._response > 0.1 and monitor._response <= 5:
+                    continue
+                elif self._contrast > 0.1 and monitor._contrast < 3:
+                    continue
+                elif (
+                    self._brightness > 0.1
+                    and self._budget > 500
+                    and monitor._brightness < 4
+                ):
+                    continue
+                elif (
+                    self._volume > 0.1
+                    and self._budget > 500
+                    and monitor._brightness < 4
+                ):
+                    continue
+                elif self._sharp > 0.1 and self._sharp < 5:
+                    continue
+                elif self._subpixel > 0.1 and self._sharp < 5:
                     continue
                 else:
                     new.append(monitor)

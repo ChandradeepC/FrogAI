@@ -98,7 +98,7 @@ const DeviceAndBudgetForm: React.FC<Props> = ({
         <div className="form-container">
             <h2>Platform and budget*</h2>
             <div className="field-grid">
-                <div className="field">
+                {/* <div className="field">
                     <label htmlFor="country">Location:</label>
                     <select
                         id="country"
@@ -108,7 +108,7 @@ const DeviceAndBudgetForm: React.FC<Props> = ({
                     >
                         <option value="US">US</option>
                     </select>
-                </div>
+                </div> */}
                 <div className="field">
                     <label htmlFor="pc-gpu">Do you have a PC?</label>
                     <select
@@ -117,12 +117,14 @@ const DeviceAndBudgetForm: React.FC<Props> = ({
                         value={pcGpu}
                         onChange={handleInputChange}
                     >
-                        <option value="">Select GPU</option>
+                        {/* <option value="">Select GPU</option>
                         {gpus.map((gpu) => (
                             <option key={gpu} value={gpu}>
                                 {gpu}
                             </option>
-                        ))}
+                        ))} */}
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
                     </select>
                 </div>
                 <div className="field">
@@ -153,7 +155,7 @@ const DeviceAndBudgetForm: React.FC<Props> = ({
                     </select>
                 </div>
                 <div className="field">
-                    <label htmlFor="budget">Budget: </label>
+                    <label htmlFor="budget">Budget (USD): </label>
                     <input
                         type="number"
                         id="budget"

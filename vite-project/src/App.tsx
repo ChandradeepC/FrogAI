@@ -10,7 +10,7 @@ import UseCasesForm from './UseCases';
 
 const App = () => {
     const [country, setCountry] = useState<string>('US');
-    const [pcGpu, setPcGpu] = useState<string>('');
+    const [pcGpu, setPcGpu] = useState<string>('no');
     const [mac, setMac] = useState<string>('no');
     const [console, setConsole] = useState<string>('');
     const [budget, setBudget] = useState<number>(0);

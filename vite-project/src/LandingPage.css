@@ -13,7 +13,7 @@
 
 /* Heading style */
 .LandingPage h2 {
-    font-size: 3.5rem;
+    font-size: 4rem;
     /* font-family: Arial, sans-serif; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
@@ -25,6 +25,7 @@
 
 /* List style */
 .LandingPage ul {
+    display: flex;
     justify-content: space-between;
     /* background-color: rgb(255, 255, 255);  */
     padding: 1rem;
@@ -35,21 +36,36 @@
     color: #000000;
     margin: 0;
     padding: 0rem 0rem 0rem 2rem;
-    max-width: 70rem;
-    margin-bottom: 0rem;
+    max-width: 100rem;
+    margin-bottom: 5rem;
     margin-top: 5rem;
-    column-count: 2;
+    column-count: 3;
     column-gap: 2rem;
 }
 
-/* List item style */
 .LandingPage li {
-    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     font-size: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 1rem;
-    /* max-width: 30rem; */
     margin-bottom: 1rem;
     display: inline-block;
+    /* border: 1px solid #ccc; */
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+    border-radius: 10px;
+    background-color: #eee;
+    min-height: 18rem;
+}
+
+.LandingPage li h3 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.LandingPage li p {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
 }
 
 .LandingPage button {
@@ -78,10 +94,13 @@ button:focus-visible {
     outline: none;
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 50rem) {
     .LandingPage ul {
         display: flex;
         flex-wrap: wrap;
+        /* max-width: 30vh; */
+        column-gap: 0rem;
+        padding: 0rem;
     }
 }
 
@@ -90,6 +109,11 @@ button:focus-visible {
         /* border: 1px solid #434343; */
         /* background-color: #000000; */
         color: #ccc;
+    }
+
+    .LandingPage li {
+        background-color: #101318;
+        /* border: 1px solid #777777; */
     }
 
     .LandingPage h2 {

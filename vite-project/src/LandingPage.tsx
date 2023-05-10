@@ -37,36 +37,33 @@ const LandingPage: React.FC = () => {
                     </Link>
                     <ul>
                         <li>
-                            Trained on thousands of conversations in Monitor
-                            Enthusiasts
+                            <h3>Relevant products</h3>
+                            <p>
+                                Monitors selected by enthusiasts based on
+                                objective measurements from multiple
+                                professional reviewers, enthusiast feedback,
+                                frog pursuits and UFO tests. Always up-to-date
+                                with the latest developments.
+                            </p>
                         </li>
                         <li>
-                            Based on the strong opinions of monitor nerds who
-                            talk about monitors 24/7 and have nothing better to
-                            do
+                            <h3>Attention to detail</h3>
+                            <p>
+                                Consideration for quirks and flaws in every
+                                recommended monitor. Algorithm tuned for every
+                                possible user situation. Consideration for how
+                                individual monitors play with different
+                                platforms like consoles and special use cases.
+                            </p>
                         </li>
                         <li>
-                            Monitors selected based on objective measurements
-                            from multiple professional reviewers, enthusiast
-                            feedback, frog pursuits and UFO tests
-                        </li>
-                        <li>
-                            Consideration for quirks and flaws in every
-                            recommended monitor
-                        </li>
-                        <li>No Samsung or Dough(Eve) bullshit</li>
-                        <li>
-                            Attention to detail and nuance (e.g. a generally bad
-                            reviewer might have one good review)
-                        </li>
-                        <li>Algorithm tuned for every possible scenario</li>
-                        <li>
-                            Links to professional reviews only, no amateurs
-                            (Optimum Tech) or advertisements (Linus Tech Tips)
-                        </li>
-                        <li>
-                            Always up-to-date with the latest developments in
-                            the monitor sphere
+                            <h3>Zero bullshit</h3>
+                            <p>
+                                No Samsung or Dough(Eve) recommendations. Links
+                                to professional reviews only, no amateurs
+                                (Optimum Tech) or advertisements/specification
+                                readers (Linus Tech Tips){' '}
+                            </p>
                         </li>
                     </ul>
                     {/* <Link to="/recommender">
