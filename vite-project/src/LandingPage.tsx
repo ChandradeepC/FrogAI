@@ -51,26 +51,27 @@ const LandingPage: React.FC = () => {
                         <li>
                             <h3>State-of-the-art algorithm</h3>
                             <p>
-                                FrogAI only recommends monitors that enthusiasts
-                                would recommend themselves. The algorithm is
-                                regularly trained on enthusiast discussions
-                                followed my manual tuning. That is, monitors
-                                that are relevant based on objective
-                                measurements aggregated from multiple
-                                professional reviewers, frog pursuits and UFO
-                                tests without any discrimination based on brand.
+                                FrogAI's algorithm recommends only those
+                                monitors that are highly regarded by
+                                enthusiasts. The algorithm is continuously
+                                trained on enthusiast conversations that involve
+                                discussion about objective measurements from
+                                multiple professional reviewers, frog pursuit
+                                shots, and UFO test shots, without any brand
+                                discrimination. This is followed by manual
+                                tuning for more precise recommendations.
                             </p>
                         </li>
                         <li>
                             <h3>Attention to detail</h3>
                             <p>
-                                The specifications do not tell the entire story.
-                                Even though most modern 4k 144hz monitors have
-                                HDMI 2.1 ports, not all of them have the same
-                                capabilities in terms of bandwidth. We take into
-                                consideration such factors and how it affects
-                                users on different platforms and various other
-                                details.
+                                We understand that specifications do not provide
+                                the complete picture. As an example, even though
+                                most modern 4k 144hz monitors have HDMI 2.1
+                                ports, their capabilities in terms of bandwidth
+                                may differ. We take into account such factors,
+                                and how they affect users on different
+                                platforms, along with various other details.
                             </p>
                         </li>
                         <li>
@@ -84,37 +85,35 @@ const LandingPage: React.FC = () => {
                         <li>
                             <h3>Professional reviews</h3>
                             <p>
-                                A professional monitor reviewer is one that uses
-                                standard tools and up-to-date and correct
-                                methodology to measure performance metrics of a
-                                monitor. FrogAI only references professional
-                                reviewers like RTINGS.com, Hardware Unboxed,
-                                techless, Bijan Jamshidi and others. We do not
-                                reference amateur reviewers or specification
-                                readers.
+                                FrogAI only references professional monitor
+                                reviewers who use standard tools and up-to-date
+                                and correct methodology to measure performance
+                                metrics. We rely on sources such as RTINGS.com,
+                                Hardware Unboxed, techless, Bijan Jamshidi, and
+                                others. We do not refer to amateur reviewers or
+                                specification readers.
                             </p>
                         </li>
                         <li>
                             <h3>All monitors are flawed</h3>
                             <p>
-                                We understand that all monitors are flawed and
-                                buying a monitor is all about finding the one
-                                with the least flaws. However different quirks
-                                affect different people in different ways so we
+                                We recognize that all monitors have flaws, and
+                                purchasing a monitor is about finding the one
+                                with the least obtrusive flaws. Therefore, we
                                 mention the quirks in every monitor along with
-                                the recommendation and let the user decide if it
-                                is a worthy compromise.
+                                our recommendations, allowing users to make
+                                informed decisions based on their unique
+                                requirements.
                             </p>
                         </li>
                         <li>
                             <h3>User friendly</h3>
                             <p>
-                                FrogAI uses complex metrics and algorithms under
-                                the hood to decide the best recommendations for
-                                your requirements but only exposes simple,
-                                easy-to-understand information about the
-                                monitors so that you can pick the best monitor
-                                without having to become a enthusiast.
+                                Despite using complex metrics and algorithms,
+                                FrogAI ensures that our recommendations are
+                                simple, easy-to-understand, and user-friendly.
+                                You can pick the best monitor for your needs
+                                without having to become an enthusiast.
                             </p>
                         </li>
                     </ul>
