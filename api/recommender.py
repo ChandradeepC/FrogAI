@@ -336,7 +336,7 @@ class MonitorRecommender(Recommender):
                     and self._backlight not in monitor._panel
                 ):
                     continue
-                elif self._budget < 0.85714 * (monitor._cost):
+                elif not self._grade and self._budget < 0.85714 * (monitor._cost):
                     continue
                 elif self._type != "mac" and (
                     "Apple" in monitor._name or "UltraFine" in monitor._name
@@ -344,6 +344,15 @@ class MonitorRecommender(Recommender):
                     continue
                 elif "console" in self._type and monitor._aspect != "Wide":
                     continue
+
+                # elif (
+                #     "console" in self._type
+                #     and "pc" not in self._type
+                #     and self._min_rr == "nopref"
+                #     and self._panel == "nopref"
+                #     and monitor._rr > 180
+                # ):
+                #     continue
                 elif self._hdr != "nopref" and self._hdr != monitor._hdr:
                     continue
                 elif (
@@ -358,16 +367,22 @@ class MonitorRecommender(Recommender):
                     continue
                 elif not self._esports and not self._grade and monitor._score == 0:
                     continue
-                elif self._comp > 0.1 and (
-                    monitor._aspect != "Wide" or monitor._rr < 240
+                elif (
+                    "pc" in self._type
+                    and self._comp > 0.1
+                    and (monitor._aspect != "Wide" or monitor._rr < 240)
                 ):
                     continue
                 elif self._text > 0.1 and monitor._subpixel < 3:
                     continue
-                elif self._casual > 0.1 and (
-                    monitor._rr < 120
-                    or (self._budget > 500 and "1920" in monitor._res)
-                    or monitor._contrast < 2
+                elif (
+                    "pc" in self._type
+                    and self._casual > 0.1
+                    and (
+                        monitor._rr < 120
+                        or (self._budget > 500 and "1920" in monitor._res)
+                        or monitor._contrast < 2
+                    )
                 ):
                     continue
                 elif self._persistence > 0.1 and monitor._rr < 240:
@@ -440,7 +455,7 @@ class MonitorRecommender(Recommender):
                         + 0.45 * monitor._contrast
                         + 0 * monitor._brightness
                         + 0 * monitor._volume
-                        + 0.2 * monitor._sharp
+                        + 0.3 * monitor._sharp
                         + 0 * monitor._subpixel
                     )
                     + self._media

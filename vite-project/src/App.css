@@ -9,7 +9,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 0rem;
-    margin-top: 7.5rem;
+    margin-top: 5rem;
 }
 
 .left-column {
@@ -46,6 +46,7 @@
     margin-top: -3.5rem;
     z-index: 999;
     overscroll-behavior: contain;
+    margin-bottom: 2rem;
 }
 
 .color-bar {
@@ -109,6 +110,30 @@
 .logo-text {
     display: flex;
     align-items: center;
+}
+
+.promo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0;
+    line-height: 0;
+    margin-bottom: 7.5rem;
+}
+
+.promo span {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.melogo {
+    font-size: initial;
+}
+
+.melogo {
+    /* transform: scale(0.2); */
+    width: 16rem;
+    height: 8rem;
+    margin-left: 2rem;
 }
 
 .tagline {

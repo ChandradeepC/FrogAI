@@ -7,6 +7,7 @@ import SpecialForm from './Special';
 import OptionalFilterForm from './OptionalFilters';
 import RecommendationForm from './Recommendations';
 import UseCasesForm from './UseCases';
+import meLogo from './assets/test.png';
 
 const App = () => {
     const [country, setCountry] = useState<string>('US');
@@ -271,7 +272,7 @@ const App = () => {
                             <div className="logo-text">
                                 <h1 className="header">FrogAI</h1>
                                 <p className="tagline">
-                                    Monitor recommendations v1.0.1
+                                    Monitor recommendations v1.0.2
                                 </p>
                             </div>
                         </div>
