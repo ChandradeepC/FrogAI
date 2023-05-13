@@ -34,4 +34,9 @@ def create_app():
     def recommender():
         return send_from_directory(app.static_folder, "index.html")
 
+    @app.route("/crash-course")
+    @cross_origin()
+    def course():
+        return send_from_directory(app.static_folder, "index.html")
+
     return app

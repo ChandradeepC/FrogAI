@@ -278,6 +278,20 @@ const App = () => {
                         </div>
                     </div>
                 </a>
+                <div className="course-link">
+                    <p>
+                        Want to learn more about monitors? Take the{' '}
+                        <a
+                            href="/crash-course"
+                            className="monitor-enthusiasts-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Monitors 101
+                        </a>{' '}
+                        15-min crash course
+                    </p>
+                </div>
                 <div className="forms-container">
                     <div className="left-column">
                         {/* <h2>Form:</h2> */}
@@ -350,7 +364,7 @@ const App = () => {
                         />
                         <div className="discord-link">
                             <p>
-                                Want to learn more? Join{' '}
+                                Need more specialized recommendations? Join{' '}
                                 <a
                                     href="https://discord.gg/ultrawide"
                                     className="monitor-enthusiasts-link"

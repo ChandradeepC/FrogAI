@@ -45,8 +45,19 @@ const LandingPage: React.FC = () => {
                         </a>
                     </div>
                     <Link to="/recommender">
-                        <button className="button">Get Started</button>
+                        <button className="button">Find a monitor</button>
                     </Link>
+                    {/* <div className="discord-link">
+                        <p>
+                            Want to learn more about monitors? Take our{' '}
+                            <a
+                                href="/crash-course"
+                                className="monitor-enthusiasts-link"
+                            >
+                                30 min crash course.
+                            </a>
+                        </p>
+                    </div> */}
                     <ul>
                         <li>
                             <h3>State-of-the-art algorithm</h3>
