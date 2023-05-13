@@ -139,6 +139,10 @@
     .monitor-box p {
         margin-bottom: 0.3rem;
     }
+    .premessage-container {
+        padding: 0 2rem;
+        box-sizing: border-box;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
