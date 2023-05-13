@@ -12,6 +12,10 @@
     font-size: 1.2rem;
 }
 
+.CrashCourse h1 {
+    margin-top: 0rem;
+}
+
 .CrashCourse h2 {
     font-size: 2rem;
     border-bottom: 1px solid rgb(187, 187, 187);
@@ -32,7 +36,7 @@
 }
 
 .footer-container {
-    min-width: 100%;
+    min-width: 85%;
 }
 
 .pad {

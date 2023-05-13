@@ -136,6 +136,10 @@
 }
 
 @media (max-width: 40rem) {
+    .monitor-box {
+        box-sizing: border-box;
+        padding: 1.5rem;
+    }
     .monitor-box p {
         margin-bottom: 0.3rem;
     }

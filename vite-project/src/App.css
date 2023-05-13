@@ -271,10 +271,6 @@
         margin-bottom: 5rem;
     }
 
-    .right-column {
-        order: -1;
-    }
-
     .header-container {
         margin-top: unset;
     }
@@ -303,6 +299,7 @@
         min-width: 100%;
         padding: 0 3rem;
         box-sizing: border-box;
+        padding-top: 4rem;
     }
 
     .right-wrapper {
@@ -315,7 +312,10 @@
     .right-column {
         max-width: calc(100% - 2rem);
         padding: 0 1rem;
-        order: -1;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 4rem;
     }
 
     .right-column > * {

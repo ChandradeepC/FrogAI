@@ -53,18 +53,22 @@ const Monitors101: React.FC = () => {
                         Strobing: Strobing works by briefly flashing the image
                         on the screen and then turning it off completely during
                         the time that it takes for the next image to be drawn.
-                        This creates a series of still images that the brain
-                        perceives as smooth motion
+                        This causes a reduction in the time an image is held on
+                        the screens resulting in less perceived motion blur.
                     </li>
                     <li>
                         Refresh rate and persistence: Refresh rate is the number
                         of times the image refreshes per second and is measured
-                        in Hz. Persistence refers to the length of time it takes
-                        for a pixel to change from one color to another. Lower
-                        persistence leads to clearer motion. For sample-and-hold
-                        displays, persistence is the inverse of response time
-                        but for strobing displays there is no clear formula and
-                        it depends on the implementation.
+                        in Hz.
+                    </li>
+                    <li>
+                        Persistence: Image persistence refers to how long a
+                        frame is held on the screen for. Lower image persistence
+                        leads to lower motion blur. In sample and hold displays,
+                        refresh rate is directly related to image persistence,
+                        for non sample and hold displays (or displays using
+                        strobing), image persistence does not depend on refresh
+                        rate.
                     </li>
                     <li>
                         Response time: The time it takes for a pixel to change
@@ -91,10 +95,10 @@ const Monitors101: React.FC = () => {
                 <h3>Image</h3>
                 <ul>
                     <li>
-                        Luminance: The amount of light emitted by the panel per
-                        unit area, measured in candelas per square meter (cd/m²)
-                        or nits. Colloquially knows as brightness but that term
-                        actually means something else.
+                        Luminance: The intensity of light emitted by the panel
+                        per unit area, measured in candelas per square meter
+                        (cd/m²) or nits. Colloquially knows as brightness but
+                        that term actually means something else.
                     </li>
                     <li>
                         Resolution: The number of pixels in the panel, typically
@@ -137,7 +141,19 @@ const Monitors101: React.FC = () => {
                 contrast ratio and color gamut. The luminance does not matter in
                 this case since all modern displays are capable of SDR
                 luminance. The overall HDR image quality is determined by the
-                luminance, resolution, contrast ratio and color volume.
+                luminance, resolution, contrast ratio and color volume.{' '}
+                <p>
+                    {' '}
+                    To learn more about this topic, check out this article by{' '}
+                    <a
+                        href="https://tftcentral.co.uk/articles/pointers_gamut"
+                        className="monitor-enthusiasts-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        TFTCentral
+                    </a>
+                </p>
                 <h3>Text</h3>
                 <ul>
                     <li>
@@ -250,20 +266,28 @@ const Monitors101: React.FC = () => {
                     </li>
                 </ul>
                 <h3>Organic Light Emitting Diode (OLED)</h3>
-                OLED panels are self-emissive panels that use organic
-                hydrocarbon that emits light by burning when an electric current
-                is applied. The organic nature leads to burn-in or permanent
-                image retention, a phenomenon where a persistent image or
-                pattern on an OLED screen can leave a faint ghost-like trace of
-                that image, even when the content on the screen has changed.
-                This can happen when a particular image or pattern is displayed
-                on the screen for an extended period, causing the organic
-                material in the OLED pixels to degrade unevenly. OLED panels are
-                generally dimmer than LCDs since the organic material decomposes
-                at an exponentially faster rate at higher brightness. OLED
-                panels can turn off pixels and as a result have perfect black
-                levels and nearly infinite contrast. They also have the fastest
-                response times and best viewing angles.
+                <p>
+                    OLED panels are self-emissive panels that use organic
+                    hydrocarbon that emits light by burning when an electric
+                    current is applied.
+                </p>{' '}
+                <p>
+                    The organic nature leads to burn-in or permanent image
+                    retention, a phenomenon where a persistent image or pattern
+                    on an OLED screen can leave a faint ghost-like trace of that
+                    image, even when the content on the screen has changed. This
+                    can happen when a particular image or pattern is displayed
+                    on the screen for an extended period, causing the organic
+                    material in the OLED pixels to degrade unevenly.
+                </p>{' '}
+                <p>
+                    OLED panels are generally dimmer than LCDs since the organic
+                    material decomposes at an exponentially faster rate at
+                    higher brightness. OLED panels can turn off pixels and as a
+                    result have perfect black levels and nearly infinite
+                    contrast. They also have the fastest response times and best
+                    viewing angles.
+                </p>
                 <ul>
                     <li>
                         White OLED (W-OLED): OLED panel from LG Display that
@@ -285,7 +309,7 @@ const Monitors101: React.FC = () => {
                         technology to create OLED layers. These are only
                         available in professional displays with low refresh
                         rate. They use a standard RGB layout so have better text
-                        compared to other OLEd types.
+                        compared to other OLED types.
                     </li>
                 </ul>
                 <h2>Quality control</h2>
