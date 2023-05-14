@@ -57,9 +57,8 @@ const Monitors101: React.FC = () => {
                         the screens resulting in less perceived motion blur.
                     </li>
                     <li>
-                        Refresh rate and persistence: Refresh rate is the number
-                        of times the image refreshes per second and is measured
-                        in Hz.
+                        Refresh rate: Refresh rate is the number of times the
+                        image refreshes per second and is measured in Hz.
                     </li>
                     <li>
                         Persistence: Image persistence refers to how long a
@@ -244,7 +243,8 @@ const Monitors101: React.FC = () => {
                             <ul>
                                 <li>
                                     Standard: Standard direct-lit backlights
-                                    have LEDs cannot be individually controlled.
+                                    have LEDs that cannot be individually
+                                    controlled.
                                 </li>
                                 <li>
                                     Full-Array Local Dimming (FALD): FALD
