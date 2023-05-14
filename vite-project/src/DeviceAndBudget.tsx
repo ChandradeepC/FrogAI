@@ -155,7 +155,7 @@ const DeviceAndBudgetForm: React.FC<Props> = ({
                     </select>
                 </div>
                 <div className="field">
-                    <label htmlFor="budget">Budget (USD): </label>
+                    <label htmlFor="budget">Budget: </label>
                     <input
                         type="number"
                         id="budget"

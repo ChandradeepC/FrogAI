@@ -350,7 +350,7 @@ const App = () => {
                         />
                         <div className="course-link">
                             <p>
-                                Want to learn more about monitors? Try the{' '}
+                                New to monitors? Try the{' '}
                                 <a
                                     href="/crash-course"
                                     className="monitor-enthusiasts-link"

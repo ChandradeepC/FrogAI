@@ -38,16 +38,23 @@ const OptionalFilterForm: React.FC<Props> = ({
 
             <div className="field-grid">
                 <div className="field">
-                    <label htmlFor="hdr">HDR: </label>
+                    <label htmlFor="res">Resolution: </label>
                     <select
-                        id="hdr"
-                        name="hdr"
-                        value={hdr}
+                        id="res"
+                        name="res"
+                        value={res}
                         onChange={handleInputChange}
                     >
                         <option value="nopref">No preference</option>
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
+                        <option value="1920x1080">1920x1080 (16:9)</option>
+                        <option value="2560x1440">2560x1440 (16:9)</option>
+                        <option value="3840x2160">3840x2160 (16:9)</option>
+                        <option value="5120x2880">5120x2880 (16:9)</option>
+                        <option value="6016x3384">6016x3384 (16:9)</option>
+                        <option value="3440x1440">3440x1440 (21:9)</option>
+                        <option value="3840x1600">3840x1600 (24:10)</option>
+                        <option value="5120x1440">5120x1440 (32:9)</option>
+                        <option value="2560x2880">2560x2880 (16:18) </option>
                     </select>
                 </div>
                 <div className="field">
@@ -59,10 +66,25 @@ const OptionalFilterForm: React.FC<Props> = ({
                         onChange={handleInputChange}
                     >
                         <option value="nopref">No preference</option>
-                        <option value="Wide">Wide</option>
-                        <option value="Ultrawide">Ultrawide</option>
-                        <option value="Superultrawide">Super Ultrawide</option>
-                        <option value="Tall">Tall</option>
+                        <option value="Wide">Wide (16:9)</option>
+                        <option value="Ultrawide">Ultrawide (21:9)</option>
+                        <option value="Superultrawide">
+                            SuperUltrawide (32:9)
+                        </option>
+                        <option value="Tall">Tall (16:18)</option>
+                    </select>
+                </div>
+                <div className="field">
+                    <label htmlFor="hdr">HDR: </label>
+                    <select
+                        id="hdr"
+                        name="hdr"
+                        value={hdr}
+                        onChange={handleInputChange}
+                    >
+                        <option value="nopref">No preference</option>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
                     </select>
                 </div>
                 <div className="field">
@@ -87,34 +109,13 @@ const OptionalFilterForm: React.FC<Props> = ({
                         onChange={handleInputChange}
                     >
                         <option value="nopref">No preference</option>
-                        <option value="24">24"</option>
-                        <option value="25">25"</option>
-                        <option value="27">27"</option>
-                        <option value="32">32"</option>
-                        <option value="34">34"</option>
-                        <option value="38">38"</option>
-                        <option value="49">49"</option>
-                    </select>
-                </div>
-                <div className="field">
-                    <label htmlFor="res">Resolution: </label>
-                    <select
-                        id="res"
-                        name="res"
-                        value={res}
-                        onChange={handleInputChange}
-                    >
-                        <option value="nopref">No preference</option>
-                        <option value="5120x1440">5120x1440</option>
-                        <option value="5120x2880">5120x2880</option>
-                        <option value="6016x3384">6016x3384</option>
-                        <option value="2560x2880">2560x2880</option>
-                        <option value="2560x1440">2560x1440</option>
-                        <option value="1920x1080">1920x1080</option>
-                        <option value="3440x1440">3440x1440</option>
-                        <option value="3840x2160">3840x2160</option>
-                        <option value="1920x1200">1920x1200</option>
-                        <option value="3840x1600">3840x1600</option>
+                        <option value="24">24" (16:9)</option>
+                        <option value="25">25" (16:9)</option>
+                        <option value="27">27" (16:9)</option>
+                        <option value="32">32" (16:9)</option>
+                        <option value="34">34" (21:9)</option>
+                        <option value="38">38" (24:10)</option>
+                        {/* <option value="49">49"</option> */}
                     </select>
                 </div>
                 <div className="field">
@@ -173,6 +174,7 @@ const OptionalFilterForm: React.FC<Props> = ({
                     >
                         <option value="nopref">No preference</option>
                         <option value="glossy">Glossy</option>
+                        <option value="matte">Matte</option>
                     </select>
                 </div>
                 <div className="field">

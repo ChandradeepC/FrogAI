@@ -361,7 +361,9 @@ class MonitorRecommender(Recommender):
                     and "calibrated" not in monitor._special
                 ):
                     continue
-                elif self._finish != "nopref" and self._finish not in monitor._special:
+                elif self._finish == "glossy" and self._finish not in monitor._special:
+                    continue
+                elif self._finish == "matte" and "glossy" in monitor._special:
                     continue
                 elif self._hub != "nopref" and "hub" not in monitor._special:
                     continue
@@ -384,6 +386,8 @@ class MonitorRecommender(Recommender):
                         or monitor._contrast < 2
                     )
                 ):
+                    continue
+                elif self._type != "console" and monitor._size > 41:
                     continue
                 elif self._persistence > 0.1 and monitor._rr < 240:
                     continue
