@@ -407,9 +407,9 @@ class MonitorRecommender(Recommender):
                     and monitor._brightness < 4
                 ):
                     continue
-                elif self._sharp > 0.1 and self._sharp < 5:
+                elif self._sharp > 0.1 and monitor._sharp < 5:
                     continue
-                elif self._subpixel > 0.1 and self._sharp < 5:
+                elif self._subpixel > 0.1 and monitor._subpixel < 5:
                     continue
                 else:
                     new.append(monitor)
