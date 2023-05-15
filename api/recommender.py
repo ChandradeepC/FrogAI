@@ -370,7 +370,7 @@ class MonitorRecommender(Recommender):
                 elif not self._esports and not self._grade and monitor._score == 0:
                     continue
                 elif (
-                    "pc" in self._type
+                    ("pc" in self._type or self._type == "nopref")
                     and self._comp > 0.1
                     and (monitor._aspect != "Wide" or monitor._rr < 240)
                 ):
