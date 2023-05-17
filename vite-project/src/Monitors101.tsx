@@ -130,7 +130,7 @@ const Monitors101: React.FC = () => {
                                 luminance from 0 to around 100 nits.
                             </li>
                             <li>
-                                High Dynamic Range (HDR:) The range of luminance
+                                High Dynamic Range (HDR): The range of luminance
                                 from 0 to 10000 nits.{' '}
                             </li>
                         </ul>
