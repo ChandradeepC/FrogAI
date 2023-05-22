@@ -98,7 +98,7 @@ const DeviceAndBudgetForm: React.FC<Props> = ({
         <div className="form-container">
             <h2>Platform and budget*</h2>
             <div className="field-grid">
-                {/* <div className="field">
+                <div className="field">
                     <label htmlFor="country">Location:</label>
                     <select
                         id="country"
@@ -107,8 +107,9 @@ const DeviceAndBudgetForm: React.FC<Props> = ({
                         onChange={handleInputChange}
                     >
                         <option value="US">US</option>
+                        <option value="EU">EU</option>
                     </select>
-                </div> */}
+                </div>
                 <div className="field">
                     <label htmlFor="pc-gpu">Do you have a PC?</label>
                     <select

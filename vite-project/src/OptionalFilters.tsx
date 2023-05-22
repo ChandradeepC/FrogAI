@@ -13,6 +13,7 @@ interface Props {
     finish: string;
     calibrated: string;
     hub: string;
+    module: string;
     handleInputChange: (
         event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
     ) => void;
@@ -30,6 +31,7 @@ const OptionalFilterForm: React.FC<Props> = ({
     finish,
     calibrated,
     hub,
+    module,
     handleInputChange
 }) => {
     return (
@@ -195,6 +197,18 @@ const OptionalFilterForm: React.FC<Props> = ({
                         id="calibrated"
                         name="calibrated"
                         value={calibrated}
+                        onChange={handleInputChange}
+                    >
+                        <option value="nopref">No preference</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+                <div className="field">
+                    <label htmlFor="module">G-sync module: </label>
+                    <select
+                        id="module"
+                        name="module"
+                        value={module}
                         onChange={handleInputChange}
                     >
                         <option value="nopref">No preference</option>

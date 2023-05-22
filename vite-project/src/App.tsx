@@ -47,6 +47,7 @@ const App = () => {
     const [finish, setFinish] = useState<string>('nopref');
     const [hub, setHub] = useState<string>('nopref');
     const [calibrated, setCalibrated] = useState<string>('nopref');
+    const [module, setModule] = useState<string>('nopref');
 
     const handleInputChange = (
         event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
@@ -237,6 +238,9 @@ const App = () => {
             case 'hdr':
                 setHdr(value);
                 break;
+            case 'module':
+                setModule(value);
+                break;
             default:
                 break;
         }
@@ -346,6 +350,7 @@ const App = () => {
                             finish={finish}
                             calibrated={calibrated}
                             hub={hub}
+                            module={module}
                             handleInputChange={handleInputChange}
                         />
                         <div className="course-link">
@@ -413,6 +418,7 @@ const App = () => {
                             finish={finish}
                             calibrated={calibrated}
                             hub={hub}
+                            module={module}
                         />
                     </div>
                 </div>

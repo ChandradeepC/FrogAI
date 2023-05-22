@@ -34,6 +34,7 @@ interface Props {
     finish: string;
     calibrated: string;
     hub: string;
+    module: string;
 }
 
 interface Monitor {
@@ -91,7 +92,8 @@ const RecommendationForm: React.FC<Props> = ({
     hdr,
     finish,
     calibrated,
-    hub
+    hub,
+    module
 }) => {
     const [monitorRecommendations, setMonitorRecommendations] = useState<
         Monitor[]
@@ -130,7 +132,8 @@ const RecommendationForm: React.FC<Props> = ({
             hdr,
             finish,
             calibrated,
-            hub
+            hub,
+            module
         };
 
         fetch('/api/monitor-recommendations', {
@@ -179,8 +182,19 @@ const RecommendationForm: React.FC<Props> = ({
         hdr,
         finish,
         calibrated,
-        hub
+        hub,
+        module
     ]);
+
+    type CurrencySymbols = {
+        [key: string]: string;
+    };
+
+    const currencySymbols: CurrencySymbols = {
+        EU: '\u20AC', // Euro symbol
+        US: '$' // Dollar symbol
+        // more countries to be added
+    };
 
     return (
         <div className="right-wrapper">
@@ -238,7 +252,8 @@ const RecommendationForm: React.FC<Props> = ({
                         <h3>
                             <span>{monitor.name}</span>
                             <span className="cost">
-                                ${monitor.cost.toFixed(0)}
+                                {currencySymbols[country]}
+                                {monitor.cost.toFixed(0)}
                             </span>
                         </h3>
                         {monitor.specialFeatures !== 'no' && (

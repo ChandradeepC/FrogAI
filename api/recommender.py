@@ -208,6 +208,7 @@ class MonitorRecommender(Recommender):
                 self._console = False
             self._mac = MonitorRecommender._scale_encoder[input["mac"]]
             self._budget = input["budget"]
+            self._country = input["country"]
 
             # Mode: basic or advanced
             self._mode = input["mode"]
@@ -249,6 +250,7 @@ class MonitorRecommender(Recommender):
             self._finish = input["finish"]
             self._hub = input["hub"]
             self._calibrated = input["calibrated"]
+            self._module = input["module"]
 
             self._data = {}
 
@@ -274,7 +276,10 @@ class MonitorRecommender(Recommender):
 
     def _load(self):
         app_root = os.path.dirname(os.path.abspath(__file__))
-        datapath = os.path.join(app_root, "..", "data", "monitors.xlsx")
+        if self._country == "US":
+            datapath = os.path.join(app_root, "..", "data", "monitors.xlsx")
+        elif self._country == "EU":
+            datapath = os.path.join(app_root, "..", "data", "monitorsEU.xlsx")
         df = pd.read_excel(datapath)
         monitorlist = []
         for _, row in df.iterrows():
@@ -330,6 +335,8 @@ class MonitorRecommender(Recommender):
                 elif self._panel != "nopref" and self._panel not in monitor._panel:
                     continue
                 elif self._res != "nopref" and self._res != monitor._res:
+                    continue
+                elif self._module == "Yes" and "Gsync module" not in monitor._special:
                     continue
                 elif (
                     self._backlight != "nopref"
