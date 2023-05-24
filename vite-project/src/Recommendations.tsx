@@ -350,8 +350,15 @@ const RecommendationForm: React.FC<Props> = ({
             ) : (
                 <div className="premessage-container">
                     <div className="premessage">
-                        No such monitors exist or are worth recommending. Try
-                        removing some filters or increasing your budget.
+                        <p>
+                            No such monitors exist or are worth recommending.
+                            Try removing some filters or increasing your budget
+                        </p>{' '}
+                        <p>
+                            You need to select atleast one use case. For print
+                            and digital photo or video editing, please select
+                            atleast one other use cases as well
+                        </p>
                     </div>
                 </div>
             )}
