@@ -60,7 +60,7 @@ const LandingPage: React.FC = () => {
                         </button>
                     </Link>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-5 mx-5 md:my-5 md:mx-10">
-                        <div className="col-span-1 md:col-span-1 bg-gray-200 p-7 rounded-xl">
+                        <div className="col-span-1 md:col-span-1 bg-gray-200 p-7 rounded-xl transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700">
                             <h3 className="text-2xl font-semibold mb-4">
                                 State-of-the-art algorithm
                             </h3>
@@ -74,7 +74,7 @@ const LandingPage: React.FC = () => {
                                 discrimination.
                             </p>
                         </div>
-                        <div className="col-span-1 md:col-span-1 bg-gray-200 p-7 rounded-xl">
+                        <div className="col-span-1 md:col-span-1 bg-gray-200 p-7 rounded-xl transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700">
                             <h3 className="text-2xl font-semibold mb-4">
                                 Attention to detail
                             </h3>
@@ -88,7 +88,7 @@ const LandingPage: React.FC = () => {
                                 platforms.
                             </p>
                         </div>
-                        <div className="col-span-1 md:col-span-1 bg-gray-200 p-7 rounded-xl">
+                        <div className="col-span-1 md:col-span-1 bg-gray-200 p-7 rounded-xl transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700">
                             <h3 className="text-2xl font-semibold mb-4">
                                 No Samsung or Dough (Eve)
                             </h3>
@@ -98,7 +98,7 @@ const LandingPage: React.FC = () => {
                                 Dough monitors never arrive.
                             </p>
                         </div>
-                        <div className="col-span-1 md:col-span-1 bg-gray-200 p-7 rounded-xl">
+                        <div className="col-span-1 md:col-span-1 bg-gray-200 p-7 rounded-xl transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700">
                             <h3 className="text-2xl font-semibold mb-4">
                                 Professional reviews
                             </h3>
@@ -112,7 +112,7 @@ const LandingPage: React.FC = () => {
                                 specification readers.
                             </p>
                         </div>
-                        <div className="col-span-1 md:col-span-1 bg-gray-200 p-7 rounded-xl">
+                        <div className="col-span-1 md:col-span-1 bg-gray-200 p-7 rounded-xl transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700">
                             <h3 className="text-2xl font-semibold mb-4">
                                 All monitors are flawed
                             </h3>
@@ -126,7 +126,7 @@ const LandingPage: React.FC = () => {
                                 requirements.
                             </p>
                         </div>
-                        <div className="col-span-1 md:col-span-1 bg-gray-200 p-7 rounded-xl">
+                        <div className="col-span-1 md:col-span-1 bg-gray-200 p-7 rounded-xl transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700">
                             <h3 className="text-2xl font-semibold mb-4">
                                 User friendly
                             </h3>
