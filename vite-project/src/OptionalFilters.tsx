@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Component.css';
 
 interface Props {
     aspect: string;
@@ -35,17 +34,23 @@ const OptionalFilterForm: React.FC<Props> = ({
     handleInputChange
 }) => {
     return (
-        <div className="form-container">
-            <h2>Optional filters</h2>
-
-            <div className="field-grid">
-                <div className="field">
-                    <label htmlFor="res">Resolution: </label>
+        <div className="bg-gray-100 rounded-xl p-5 my-5">
+            <h2 className="text-xl font-semibold mb-4">Optional filters</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {/* Resolution */}
+                <div className="mb-4">
+                    <label
+                        htmlFor="res"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Resolution:
+                    </label>
                     <select
                         id="res"
                         name="res"
                         value={res}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="nopref">No preference</option>
                         <option value="1920x1080">1920x1080 (16:9)</option>
@@ -59,13 +64,21 @@ const OptionalFilterForm: React.FC<Props> = ({
                         <option value="2560x2880">2560x2880 (16:18) </option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="aspect">Aspect ratio: </label>
+
+                {/* Aspect Ratio */}
+                <div className="mb-4">
+                    <label
+                        htmlFor="aspect"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Aspect ratio:
+                    </label>
                     <select
                         id="aspect"
                         name="aspect"
                         value={aspect}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="nopref">No preference</option>
                         <option value="Wide">Wide (16:9)</option>
@@ -76,39 +89,63 @@ const OptionalFilterForm: React.FC<Props> = ({
                         <option value="Tall">Tall (16:18)</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="hdr">HDR: </label>
+
+                {/* HDR */}
+                <div className="mb-4">
+                    <label
+                        htmlFor="hdr"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        HDR:
+                    </label>
                     <select
                         id="hdr"
                         name="hdr"
                         value={hdr}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="nopref">No preference</option>
                         <option value="No">No</option>
                         <option value="Yes">Yes</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="curve">Curve: </label>
+
+                {/* Curve */}
+                <div className="mb-4">
+                    <label
+                        htmlFor="curve"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Curve:
+                    </label>
                     <select
                         id="curve"
                         name="curve"
                         value={curve}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="nopref">No preference</option>
                         <option value="No">No</option>
                         <option value="Yes">Yes</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="size">Size: </label>
+
+                {/* Size */}
+                <div className="mb-4">
+                    <label
+                        htmlFor="size"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Size:
+                    </label>
                     <select
                         id="size"
                         name="size"
                         value={size}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="nopref">No preference</option>
                         <option value="24">24" (16:9)</option>
@@ -120,13 +157,21 @@ const OptionalFilterForm: React.FC<Props> = ({
                         {/* <option value="49">49"</option> */}
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="minRR">Minimum refresh rate: </label>
+
+                {/* Min Refresh Rate */}
+                <div className="mb-4">
+                    <label
+                        htmlFor="minRR"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Minimum refresh rate:
+                    </label>
                     <select
                         id="minRR"
                         name="minRR"
                         value={minRR}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="nopref">No preference</option>
                         <option value="60hz">60hz</option>
@@ -138,13 +183,21 @@ const OptionalFilterForm: React.FC<Props> = ({
                         <option value="500hz">500hz</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="panel">Panel type: </label>
+
+                {/* Panel Type */}
+                <div className="mb-4">
+                    <label
+                        htmlFor="panel"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Panel type:
+                    </label>
                     <select
                         id="panel"
                         name="panel"
                         value={panel}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="nopref">No preference</option>
                         <option value="IPS">IPS</option>
@@ -153,63 +206,103 @@ const OptionalFilterForm: React.FC<Props> = ({
                         <option value="OLED">OLED</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="backlight">Backlight type: </label>
+
+                {/* Backlight Type */}
+                <div className="mb-4">
+                    <label
+                        htmlFor="backlight"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Backlight type:
+                    </label>
                     <select
                         id="backlight"
                         name="backlight"
                         value={backlight}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="nopref">No preference</option>
                         <option value="MiniLED">MiniLED</option>
                         <option value="FALD">FALD</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="finish">Finish: </label>
+
+                {/* Finish */}
+                <div className="mb-4">
+                    <label
+                        htmlFor="finish"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Finish:
+                    </label>
                     <select
                         id="finish"
                         name="finish"
                         value={finish}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="nopref">No preference</option>
                         <option value="glossy">Glossy</option>
                         <option value="matte">Matte</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="hub">Type-C Hub: </label>
+
+                {/* Type-C Hub */}
+                <div className="mb-4">
+                    <label
+                        htmlFor="hub"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Type-C Hub:
+                    </label>
                     <select
                         id="hub"
                         name="hub"
                         value={hub}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="nopref">No preference</option>
                         <option value="Yes">Yes</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="calibrated">Factory calibration: </label>
+
+                {/* Factory Calibration */}
+                <div className="mb-4">
+                    <label
+                        htmlFor="calibrated"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Factory calibration:
+                    </label>
                     <select
                         id="calibrated"
                         name="calibrated"
                         value={calibrated}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="nopref">No preference</option>
                         <option value="Yes">Yes</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="module">G-sync module: </label>
+
+                {/* G-sync Module */}
+                <div className="mb-4">
+                    <label
+                        htmlFor="module"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        G-sync module:
+                    </label>
                     <select
                         id="module"
                         name="module"
                         value={module}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="nopref">No preference</option>
                         <option value="Yes">Yes</option>

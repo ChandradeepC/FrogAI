@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Component.css';
 
 interface Props {
     persistence: string;
@@ -25,11 +24,18 @@ const AdvancedForm: React.FC<Props> = ({
     handleInputChange
 }) => {
     return (
-        <div className="form-container">
-            <h2>Performance requirements</h2>
-            <div className="field-grid">
-                <div className="field">
-                    <label htmlFor="persistence">Persistence blur:</label>
+        <div className="bg-gray-100 rounded-xl p-5 my-5">
+            <h2 className="text-xl font-semibold mb-4">
+                Performance requirements
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div className="mb-4">
+                    <label
+                        htmlFor="persistence"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Persistence blur:
+                    </label>
                     <select
                         id="persistence"
                         name="persistence"
@@ -43,6 +49,7 @@ const AdvancedForm: React.FC<Props> = ({
                             brightness === 'only' ||
                             volume === 'only'
                         }
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="not">Don't care</option>
                         <option value="some">Nice to have</option>
@@ -51,8 +58,13 @@ const AdvancedForm: React.FC<Props> = ({
                         <option value="only">Sole focus</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="response">Response time:</label>
+                <div className="mb-4">
+                    <label
+                        htmlFor="response"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Response time:
+                    </label>
                     <select
                         id="response"
                         name="response"
@@ -66,6 +78,7 @@ const AdvancedForm: React.FC<Props> = ({
                             brightness === 'only' ||
                             volume === 'only'
                         }
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="not">Don't care</option>
                         <option value="some">Nice to have</option>
@@ -74,8 +87,13 @@ const AdvancedForm: React.FC<Props> = ({
                         <option value="only">Sole focus</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="contrast">Contrast ratio:</label>
+                <div className="mb-4">
+                    <label
+                        htmlFor="contrast"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Contrast ratio:
+                    </label>
                     <select
                         id="contrast"
                         name="contrast"
@@ -89,6 +107,7 @@ const AdvancedForm: React.FC<Props> = ({
                             brightness === 'only' ||
                             volume === 'only'
                         }
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="not">Don't care</option>
                         <option value="some">Nice to have</option>
@@ -97,8 +116,13 @@ const AdvancedForm: React.FC<Props> = ({
                         <option value="only">Sole focus</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="brightness">Brightness:</label>
+                <div className="mb-4">
+                    <label
+                        htmlFor="brightness"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Brightness:
+                    </label>
                     <select
                         id="birghtness"
                         name="brightness"
@@ -112,6 +136,7 @@ const AdvancedForm: React.FC<Props> = ({
                             persistence === 'only' ||
                             volume === 'only'
                         }
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="not">Don't care</option>
                         <option value="some">Nice to have</option>
@@ -120,8 +145,13 @@ const AdvancedForm: React.FC<Props> = ({
                         <option value="only">Sole focus</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="volume">Color volume:</label>
+                <div className="mb-4">
+                    <label
+                        htmlFor="volume"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Color volume:
+                    </label>
                     <select
                         id="volume"
                         name="volume"
@@ -135,6 +165,7 @@ const AdvancedForm: React.FC<Props> = ({
                             brightness === 'only' ||
                             persistence === 'only'
                         }
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="not">Don't care</option>
                         <option value="some">Nice to have</option>
@@ -143,8 +174,13 @@ const AdvancedForm: React.FC<Props> = ({
                         <option value="only">Sole focus</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="sharp">Image resolution:</label>
+                <div className="mb-4">
+                    <label
+                        htmlFor="sharp"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Image resolution:
+                    </label>
                     <select
                         id="sharp"
                         name="sharp"
@@ -158,6 +194,7 @@ const AdvancedForm: React.FC<Props> = ({
                             brightness === 'only' ||
                             volume === 'only'
                         }
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="not">Don't care</option>
                         <option value="some">Nice to have</option>
@@ -166,8 +203,13 @@ const AdvancedForm: React.FC<Props> = ({
                         <option value="only">Sole focus</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="subpixel">Text quality:</label>
+                <div className="mb-4">
+                    <label
+                        htmlFor="subpixel"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Text quality:
+                    </label>
                     <select
                         id="subpixel"
                         name="subpixel"
@@ -181,6 +223,7 @@ const AdvancedForm: React.FC<Props> = ({
                             brightness === 'only' ||
                             volume === 'only'
                         }
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="not">Don't care</option>
                         <option value="some">Nice to have</option>

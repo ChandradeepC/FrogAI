@@ -23,9 +23,9 @@ async def on_message(message):
         return
 
     # Check if the message content is a command (e.g., "!recommend")
-    if message.content.startswith("!recommend"):
+    if message.content.startswith("!rec"):
         # Extract the user input
-        user_input = message.content[10:]  # Remove "!recommend" from the message
+        user_input = message.content[4:]  # Remove "!recommend" from the message
 
         # default payload
         payload = {
@@ -112,7 +112,7 @@ async def on_message(message):
             await message.channel.send(formatted_recommendations_text)
             if len(formatted_recommendations) > 4:
                 formatted_recommendations_text = "\n".join(
-                    formatted_recommendations[4:8]
+                    formatted_recommendations[4:]
                 )
                 await message.channel.send(formatted_recommendations_text)
 
@@ -120,6 +120,6 @@ async def on_message(message):
             await message.channel.send(f"Error: {str(e)}")
 
 
-bot_token = "OTg0NDg2NjkxMTk4ODY1NDE5.GNWQ6h.rl4MJ6UV5DTvcnQhqN_w_TfeS6mHgcHCBb4Agg"
+bot_token = "OTg0NDg2NjkxMTk4ODY1NDE5.Gd8RyN.KN5b_701SPvhL2_E1VK1WYKCVri-_-ZkO3Xyjc"
 
 client.run(bot_token)

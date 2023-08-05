@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import frogaiLogo from './assets/frogai.jpg';
-import './App.css';
 import DeviceAndBudgetForm from './DeviceAndBudget';
 import AdvancedForm from './Advanced';
 import SpecialForm from './Special';
 import OptionalFilterForm from './OptionalFilters';
 import RecommendationForm from './Recommendations';
 import UseCasesForm from './UseCases';
-import meLogo from './assets/test.png';
 
 const App = () => {
     const [country, setCountry] = useState<string>('US');
@@ -263,28 +261,28 @@ const App = () => {
 
     return (
         <div>
-            <div className="wrapper">
-                <a href="/" className="header-container">
-                    <div>
-                        <div className="color-bar"></div>
-                        <div className="brand">
+            <div className="flex flex-col min-h-screen max-w-full">
+                <header className="bg-gray-900 text-white py-2 mb-16">
+                    <div className="container mx-auto p-1 flex items-center max-w-screen-xl">
+                        <a href="/">
                             <img
                                 src={frogaiLogo}
                                 alt="FrogAI Logo"
-                                className="frogai-logo"
+                                className="h-10 mr-5 rounded-full ring-4 ring-gray-700"
                             />
-                            <div className="logo-text">
-                                <h1 className="header">FrogAI</h1>
-                                <p className="tagline">
-                                    Monitor recommendations v1.0.2
-                                </p>
-                            </div>
-                        </div>
+                        </a>
+                        <a href="/" className="flex items-center">
+                            <h1 className="text-pink-500 text-3xl font-bold  mr-2">
+                                FrogAI
+                            </h1>
+                            <p className="text-sm text-gray-400">
+                                Monitor recommendations v1.0.3
+                            </p>
+                        </a>
                     </div>
-                </a>
-                <div className="forms-container">
-                    <div className="left-column">
-                        {/* <h2>Form:</h2> */}
+                </header>
+                <div className="container max-w-screen-xl flex flex-col md:flex-row md:space-x-10 md:px-5 items-start justify-start mx-auto">
+                    <div className="md:w-2/5 mx-5">
                         <DeviceAndBudgetForm
                             pcGpu={pcGpu}
                             mac={mac}
@@ -293,17 +291,15 @@ const App = () => {
                             country={country}
                             handleInputChange={handleInputChange}
                         />
-                        <div className="toggle-container">
-                            <label className="toggle">
+                        <div className="flex items-center mt-4 ml-4">
+                            <label className="relative inline-flex items-center">
                                 <input
                                     type="checkbox"
                                     checked={mode === 'advanced'}
                                     onChange={handleModeToggle}
+                                    className="form-checkbox h-4 w-4 text-pink-500 transition duration-150 ease-in-out"
                                 />
-                                <span className="switch">
-                                    <span className="knob"></span>
-                                </span>
-                                <span className="toggle-text">
+                                <span className="ml-2 text-gray-">
                                     Enthusiast Mode (experimental)
                                 </span>
                             </label>
@@ -353,12 +349,12 @@ const App = () => {
                             module={module}
                             handleInputChange={handleInputChange}
                         />
-                        <div className="course-link">
+                        <div className="my-4">
                             <p>
                                 New to monitors? Try the{' '}
                                 <a
                                     href="/crash-course"
-                                    className="monitor-enthusiasts-link"
+                                    className="text-pink-500 hover:underline"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -367,19 +363,19 @@ const App = () => {
                                 15-min course
                             </p>
                         </div>
-                        <div className="discord-link">
+                        <div className="my-4">
                             <p>
                                 Need more specialized recommendations? Join{' '}
                                 <a
                                     href="https://discord.gg/ultrawide"
-                                    className="monitor-enthusiasts-link"
+                                    className="text-pink-500 hover:underline"
                                 >
                                     Monitor Enthusiasts
                                 </a>
                             </p>
                         </div>
                     </div>
-                    <div className="right-column">
+                    <div className="md:w-3/5 mt-5 md:mt-5 mx-5">
                         <RecommendationForm
                             country={country}
                             pcGpu={pcGpu}
@@ -422,12 +418,13 @@ const App = () => {
                         />
                     </div>
                 </div>
-            </div>
-
-            <div className="footer-container">
-                <div className="bottom-text">
-                    <p>© 2023 theNullCrown</p>
-                </div>
+                <footer className="container max-w-screen-xl mx-auto border-t border-gray-300 py-4 mt-20">
+                    <div className="container max-w-screen-xl mx-auto">
+                        <p className="text-left px-2 text-sm">
+                            © 2023 theNullCrown
+                        </p>
+                    </div>
+                </footer>
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Component.css';
+// import './Component.css';
 
 interface Props {
     pcGpu: string;
@@ -95,58 +95,76 @@ const DeviceAndBudgetForm: React.FC<Props> = ({
     ];
 
     return (
-        <div className="form-container">
-            <h2>Platform and budget*</h2>
-            <div className="field-grid">
-                <div className="field">
-                    <label htmlFor="country">Location:</label>
+        <div className="bg-gray-100 rounded-xl p-5 my-5">
+            <h2 className="text-xl font-semibold mb-4">Platform and budget*</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div className="mb-4">
+                    <label
+                        htmlFor="country"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Location:
+                    </label>
                     <select
                         id="country"
                         name="country"
                         value={country}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="US">US</option>
                         <option value="EU">EU</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="pc-gpu">Do you have a PC?</label>
+                <div className="mb-4">
+                    <label
+                        htmlFor="pc-gpu"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Do you have a PC?
+                    </label>
                     <select
                         id="pc-gpu"
                         name="pc-gpu"
                         value={pcGpu}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
-                        {/* <option value="">Select GPU</option>
-                        {gpus.map((gpu) => (
-                            <option key={gpu} value={gpu}>
-                                {gpu}
-                            </option>
-                        ))} */}
                         <option value="no">No</option>
                         <option value="yes">Yes</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="mac">Do you have a Mac? </label>
+                <div className="mb-4">
+                    <label
+                        htmlFor="mac"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Do you have a Mac?
+                    </label>
                     <select
                         id="mac"
                         name="mac"
                         value={mac}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="no">No</option>
                         <option value="yes">Yes</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="console">Do you have a console?</label>
+                <div className="mb-4">
+                    <label
+                        htmlFor="console"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Do you have a console?
+                    </label>
                     <select
                         id="console"
                         name="console"
                         value={console}
                         onChange={handleInputChange}
+                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     >
                         <option value="">Select console</option>
                         <option value="no">No</option>
@@ -155,8 +173,13 @@ const DeviceAndBudgetForm: React.FC<Props> = ({
                         <option value="ps5">PS5</option>
                     </select>
                 </div>
-                <div className="field">
-                    <label htmlFor="budget">Budget: </label>
+                <div className="mb-4">
+                    <label
+                        htmlFor="budget"
+                        className="block text-sm font-medium text-gray-700"
+                    >
+                        Budget:
+                    </label>
                     <input
                         type="number"
                         id="budget"
@@ -164,6 +187,7 @@ const DeviceAndBudgetForm: React.FC<Props> = ({
                         value={budget}
                         onChange={handleInputChange}
                         step="50"
+                        className="mt-1 block w-full shadow-sm sm:text-sm focus:ring-pink-500 focus:border-pink-500 border-gray-300 rounded-md transition-shadow ease-in duration-50 hover:shadow-md hover:shadow-pink-700"
                     />
                 </div>
             </div>
